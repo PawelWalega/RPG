@@ -1,23 +1,23 @@
 <template>
-  <div class="col-md-2">
-    <div class="row row-cols-1 gy-3 gx-0 px-4">
+  <div class="col-md-2 p-0">
+    <div class="row row-cols-1 gy-3 gx-0 px-1">
       <div
-        class="col border border-dark py-4 justify-content-center align-items-center d-flex flex-column rounded"
+        class="col border border-dark py-4 justify-content-center align-items-center d-flex flex-column rounded shadow-sm hover-link"
       >
         <img :src="icons.knightIcon" class="icon" />
       </div>
       <div
-        class="col border border-dark py-4 justify-content-center align-items-center d-flex flex-column rounded"
+        class="col border border-dark py-4 justify-content-center align-items-center d-flex flex-column rounded shadow-sm hover-link"
       >
         <img :src="icons.fightIcon" class="icon" />
       </div>
       <div
-        class="col border border-dark py-4 justify-content-center align-items-center d-flex flex-column rounded"
+        class="col border border-dark py-4 justify-content-center align-items-center d-flex flex-column rounded shadow-sm hover-link"
       >
         <img :src="icons.bookIcon" class="icon" />
       </div>
       <div
-        class="col border border-dark py-4 justify-content-center align-items-center d-flex flex-column rounded"
+        class="col border border-dark py-4 justify-content-center align-items-center d-flex flex-column rounded shadow-sm hover-link"
       >
         <img :src="icons.doorIcon" class="icon" />
       </div>
@@ -38,10 +38,17 @@ export default {
   },
 };
 </script>
-<style scoped>
+<style scoped lang="scss">
 .icon {
   width: 3rem;
   height: 3rem;
   fill: #000;
+}
+.hover-link {
+  transition: all 0.1s ease-in-out;
+  &:hover {
+    transform: translateY(2px) scale(1.03);
+    cursor: pointer;
+  }
 }
 </style>
