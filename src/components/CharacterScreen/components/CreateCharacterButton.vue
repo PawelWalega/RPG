@@ -1,6 +1,24 @@
 <template>
-  <button class="btn btn-outline-primary btn-sm position-absolute add-character">New Character</button>
+  <button
+    class="btn btn-outline-primary btn-sm position-absolute add-character"
+    @click="newCharacterBtnClicked()"
+  >New Character</button>
 </template>
+<script>
+import { EventBus } from "../../EventBus";
+export default {
+  data() {
+    return {
+      text: "I got clicked",
+    };
+  },
+  methods: {
+    newCharacterBtnClicked() {
+      EventBus.$emit("new-character-button-clicked", this.text);
+    },
+  },
+};
+</script>
 <style scoped>
 .add-character {
   bottom: 1px;

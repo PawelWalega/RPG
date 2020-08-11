@@ -1,26 +1,24 @@
 <template>
-  <div class="col-md-10 px-4">
-    <character-creation v-if="characters.length===0"></character-creation>
-    <characters-screen v-else :characters="characters"></characters-screen>
+  <div class="col-md-10">
+    <characters-screen v-if="page === 'characters'"></characters-screen>
+    <battle-screen v-if="page === 'battle'"></battle-screen>
+    <app-rules v-if="page === 'rules'"></app-rules>
   </div>
 </template>
-<script>
-import charactersScreen from "./CharacterScreen/Characters.vue";
-import characterCreation from "./CharacterScreen/CharacterCreation.vue";
+<script >
+import charactersScreen from "./CharacterScreen/CharactersScreen.vue";
+import battleScreen from "./Battle/BattleScreen.vue";
+import appRules from "./Rules/Rules.vue";
 
 export default {
   data() {
-    return {
-      characters: [
-        { name: "Ataldea" },
-        { name: "Bratford" },
-        { name: "Alexa" },
-      ],
-    };
+    return {};
   },
-  components: {
-    charactersScreen,
-    characterCreation,
+  computed: {
+    page() {
+      return this.$store.state.page;
+    },
   },
+  components: { charactersScreen, battleScreen, appRules },
 };
 </script>
