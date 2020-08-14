@@ -23,23 +23,59 @@
         <!-- TALENTS -->
         <!-- -------------------------------------------- -->
         <div class="mb-3 col-4">
-          <label class="form-label">Select Talent #1 (hover for details):</label>
+          <label class="form-label">Basic Attack (hover for details):</label>
           <select v-if="!classNotSelected" class="form-select form-select-sm">
             <option>Select a class first!</option>
           </select>
 
           <select v-else class="form-select form-select-sm" @change="talentSelected($event)">
             <option
-              v-for="(talent, name) in selectedClass.talents1"
-              :key="name"
+              v-for="(talent) in selectedClass.talents.tier1"
+              :key="talent.name"
+              data-tier="tier1"
               data-toggle="tooltip"
-              data-placement="top"
-              :title="talent"
-            >{{ name }}</option>
+              data-placement="bottom"
+              :title="talent.tooltip"
+            >{{ talent.name }}</option>
           </select>
         </div>
 
         <div class="mb-3 col-4">
+          <label class="form-label">Special Attack (hover for details):</label>
+          <select v-if="!classNotSelected" class="form-select form-select-sm">
+            <option>Select a class first!</option>
+          </select>
+
+          <select v-else class="form-select form-select-sm" @change="talentSelected($event)">
+            <option
+              v-for="(talent) in selectedClass.talents.tier2"
+              :key="talent.name"
+              data-tier="tier2"
+              data-toggle="tooltip"
+              data-placement="bottom"
+              :title="talent.tooltip"
+            >{{ talent.name }}</option>
+          </select>
+        </div>
+
+        <div class="mb-3 col-4">
+          <label class="form-label">Defensive Ability (hover for details):</label>
+          <select v-if="!classNotSelected" class="form-select form-select-sm">
+            <option>Select a class first!</option>
+          </select>
+
+          <select v-else class="form-select form-select-sm" @change="talentSelected($event)">
+            <option
+              v-for="(talent) in selectedClass.talents.tier3"
+              :key="talent.name"
+              data-tier="tier3"
+              data-toggle="tooltip"
+              data-placement="bottom"
+              :title="talent.tooltip"
+            >{{ talent.name }}</option>
+          </select>
+        </div>
+        <!-- <div class="mb-3 col-4">
           <label class="form-label">Select Talent #2 (hover for details):</label>
           <select v-if="!classNotSelected" class="form-select form-select-sm">
             <option>Select a class first!</option>
@@ -47,7 +83,7 @@
 
           <select v-else class="form-select form-select-sm" @change="talentSelected($event)">
             <option
-              v-for="(talent, name) in selectedClass.talents2"
+              v-for="(talent, name) in selectedClass.talents.tier2"
               :key="name"
               data-toggle="tooltip"
               data-placement="top"
@@ -64,14 +100,14 @@
 
           <select v-else class="form-select form-select-sm" @change="talentSelected($event)">
             <option
-              v-for="(talent, name) in selectedClass.talents3"
+              v-for="(talent, name) in selectedClass.talents.tier3"
               :key="name"
               data-toggle="tooltip"
               data-placement="top"
               :title="talent"
             >{{ name }}</option>
           </select>
-        </div>
+        </div>-->
 
         <!-- Attribute Selection -->
         <!-- --------------------------------------- -->
@@ -81,14 +117,14 @@
             class="btn btn-sm btn-outline-dark"
             data-stat="str"
             data-action="add"
-            @click.prevent="btnClicked($event)"
+            @click.prevent="attributesBtnClicked($event)"
           >+</button>
           <span class="mx-2">{{ strength }}</span>
           <button
             class="btn btn-sm btn-outline-dark"
             data-stat="str"
             data-action="subtract"
-            @click.prevent="btnClicked($event)"
+            @click.prevent="attributesBtnClicked($event)"
           >-</button>
         </div>
 
@@ -98,14 +134,14 @@
             class="btn btn-sm btn-outline-dark"
             data-stat="agi"
             data-action="add"
-            @click.prevent="btnClicked($event)"
+            @click.prevent="attributesBtnClicked($event)"
           >+</button>
           <span class="mx-2">{{ agility }}</span>
           <button
             class="btn btn-sm btn-outline-dark"
             data-stat="agi"
             data-action="subtract"
-            @click.prevent="btnClicked($event)"
+            @click.prevent="attributesBtnClicked($event)"
           >-</button>
         </div>
 
@@ -115,14 +151,14 @@
             class="btn btn-sm btn-outline-dark"
             data-stat="int"
             data-action="add"
-            @click.prevent="btnClicked($event)"
+            @click.prevent="attributesBtnClicked($event)"
           >+</button>
           <span class="mx-2">{{ inteligence }}</span>
           <button
             class="btn btn-sm btn-outline-dark"
             data-stat="int"
             data-action="subtract"
-            @click.prevent="btnClicked($event)"
+            @click.prevent="attributesBtnClicked($event)"
           >-</button>
         </div>
 
@@ -132,14 +168,14 @@
             class="btn btn-sm btn-outline-dark"
             data-stat="vit"
             data-action="add"
-            @click.prevent="btnClicked($event)"
+            @click.prevent="attributesBtnClicked($event)"
           >+</button>
           <span class="mx-2">{{ vitality }}</span>
           <button
             class="btn btn-sm btn-outline-dark"
             data-stat="vit"
             data-action="subtract"
-            @click.prevent="btnClicked($event)"
+            @click.prevent="attributesBtnClicked($event)"
           >-</button>
         </div>
 

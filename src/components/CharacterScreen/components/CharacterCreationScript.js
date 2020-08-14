@@ -3,48 +3,64 @@ export default {
 		return {
 			classes              : [
 				{
-					name     : 'Mage',
-					talents1 : {
-						'Frost Bolt' : 'Cast a bolt of frost at your oponent',
-						'Fire Bolt'  : 'Cast a bolt of fire at your oponent'
-					},
-					talents2 : {
-						'MAGE Tier 2 Tal1' : 'Talent Tooltip',
-						'MAGE Tier 2 Tal2' : 'Talent Tooltip'
-					},
-					talents3 : {
-						'MAGE Tier 3 Tal1' : 'Talent Tooltip',
-						'MAGE Tier 3 Tal2' : 'Talent Tooltip'
+					name    : 'Mage',
+					talents : {
+						tier1 : [
+							{
+								name    : 'Frost Bolt',
+								tooltip : 'Cast a bolt of frost at your oponent'
+							},
+							{
+								name    : 'Fire Bolt',
+								tooltip : 'Cast a bolt of fire at your oponent'
+							}
+						],
+						tier2 : [
+							{ name: 'MAGE Tier 2 Tal1', tooltip: 'Talent Tooltip' },
+							{ name: 'MAGE Tier 2 Tal2', tooltip: 'Talent Tooltip' }
+						],
+						tier3 : [
+							{ name: 'MAGE Tier 3 Tal1', tooltip: 'Talent Tooltip' },
+							{ name: 'MAGE Tier 3 Tal2', tooltip: 'Talent Tooltip' }
+						]
 					}
 				},
 				{
-					name     : 'Warrior',
-					talents1 : {
-						'Sword Attack' :
-							'Swing at your oponent with increased damage',
-						'Shield Bash'  :
-							'Hit oponent with your shield with an increased chance to hit'
-					},
-					talents2 : {
-						'WARRIOR Tier 2 Tal1' : 'Talent Tooltip',
-						'WARRIOR Tier 2 Tal2' : 'Talent Tooltip'
-					},
-					talents3 : {
-						'WARRIOR Tier 3 Tal1' : 'Talent Tooltip',
-						'WARRIOR Tier 3 Tal2' : 'Talent Tooltip'
+					name    : 'Warrior',
+					talents : {
+						tier1 : [
+							{
+								name    : 'Sword Attack',
+								tooltip : 'Swing at your oponent with increased damage'
+							},
+							{
+								name    : 'Shield Bash',
+								tooltip :
+									'Hit oponent with your shield with an increased chance to hit'
+							}
+						],
+						tier2 : [
+							{ name: 'WARRIOR Tier 2 Tal1', tooltip: 'Talent Tooltip' },
+							{ name: 'WARRIOR Tier 2 Tal2', tooltip: 'Talent Tooltip' }
+						],
+						tier3 : [
+							{ name: 'WARRIOR Tier 3 Tal1', tooltip: 'Talent Tooltip' },
+							{ name: 'WARRIOR Tier 3 Tal2', tooltip: 'Talent Tooltip' }
+						]
 					}
 				}
 				// 'Ranger',
 				// 'Knight'
 			],
 			character            : {
-				name  : '',
-				int   : 7,
-				str   : 8,
-				agi   : 7,
-				vit   : 8,
-				class : null,
-				race  : null
+				name            : '',
+				int             : 7,
+				str             : 8,
+				agi             : 7,
+				vit             : 8,
+				class           : null,
+				race            : null,
+				selectedTalents : { tier1: '', tier2: '', tier3: '' }
 			},
 			classModifiers       : {
 				int : 0,
@@ -79,14 +95,24 @@ export default {
 				this.selectedClass = this.classes.filter(
 					(c) => c.name === this.character.class
 				)[0];
+				const talents = this.selectedClass.talents;
+				for (let tal in talents) {
+					this.character.selectedTalents[tal] = talents[tal][0]['name'];
+				}
 			}
 		},
 
 		talentSelected(event) {
-			console.log(event.target.value);
+			const talentName = event.target.value;
+			const options = event.target.children;
+			let tier;
+			for (let child of options) {
+				if (child.label === talentName) tier = child.dataset.tier;
+			}
+			this.character.selectedTalents[tier] = talentName;
 		},
 
-		btnClicked(event) {
+		attributesBtnClicked(event) {
 			if (event.target.dataset.action === 'add') {
 				if (!this.pointsLeft) {
 					alert('No points left!');
@@ -95,12 +121,17 @@ export default {
 				this.character[event.target.dataset.stat] += 1;
 				this.pointsLeft -= 1;
 			} else if (event.target.dataset.action === 'subtract') {
-				this.character[event.target.dataset.stat] -= 1;
-				this.pointsLeft += 1;
+				if (this.character[event.target.dataset.stat] === 5) {
+					alert("You can't lower stat below 5!");
+					return;
+				} else {
+					this.character[event.target.dataset.stat] -= 1;
+					this.pointsLeft += 1;
+				}
 			}
 		},
 
-		raceSelected       : function(event) {
+		raceSelected         : function(event) {
 			if (event.target.value === 'Select a race:') {
 				this.character.race = null;
 			} else {
