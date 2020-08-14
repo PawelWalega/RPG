@@ -8,16 +8,26 @@
           <label class="form-label">Character name:</label>
           <input type="text" class="form-control-sm" v-model="character.name" />
         </div>
-        <div class="mb-3 col-4">
-          <select class="form-select form-select-sm" @change="classSelected($event)">
-            <option>Select a class:</option>
-            <option v-for="(charClass, idx) in classes" :key="idx">{{ charClass.name }}</option>
-          </select>
-        </div>
+
         <div class="mb-3 col-4">
           <select class="form-select form-select-sm" @change="raceSelected($event)">
             <option>Select a race:</option>
-            <option v-for="(race, idx) in races" :key="idx">{{ race.race }}</option>
+            <option
+              v-for="(race, val) in allRaces"
+              :key="val"
+              :value="race.identifier"
+            >{{ race.name }}</option>
+          </select>
+        </div>
+
+        <div class="mb-3 col-4">
+          <select class="form-select form-select-sm" @change="classSelected($event)">
+            <option>Select a class:</option>
+            <option
+              v-for="(charClass, idx) in allClasses"
+              :key="idx"
+              :value="charClass.identifier"
+            >{{ charClass.name }}</option>
           </select>
         </div>
         <!-- TALENTS -->
@@ -75,39 +85,6 @@
             >{{ talent.name }}</option>
           </select>
         </div>
-        <!-- <div class="mb-3 col-4">
-          <label class="form-label">Select Talent #2 (hover for details):</label>
-          <select v-if="!classNotSelected" class="form-select form-select-sm">
-            <option>Select a class first!</option>
-          </select>
-
-          <select v-else class="form-select form-select-sm" @change="talentSelected($event)">
-            <option
-              v-for="(talent, name) in selectedClass.talents.tier2"
-              :key="name"
-              data-toggle="tooltip"
-              data-placement="top"
-              :title="talent"
-            >{{ name }}</option>
-          </select>
-        </div>
-
-        <div class="mb-3 col-4">
-          <label class="form-label">Select Talent #3 (hover for details):</label>
-          <select v-if="!classNotSelected" class="form-select form-select-sm">
-            <option>Select a class first!</option>
-          </select>
-
-          <select v-else class="form-select form-select-sm" @change="talentSelected($event)">
-            <option
-              v-for="(talent, name) in selectedClass.talents.tier3"
-              :key="name"
-              data-toggle="tooltip"
-              data-placement="top"
-              :title="talent"
-            >{{ name }}</option>
-          </select>
-        </div>-->
 
         <!-- Attribute Selection -->
         <!-- --------------------------------------- -->
@@ -185,16 +162,19 @@
           Info:
           <div class="row">
             <div class="col-3">Points left: {{ pointsLeft }}</div>
-            <div class="col-3">Selected Class: {{ character.name || "No class selected" }}</div>
-            <div class="col-3">Selected Race: {{ selectedRace || "No race selected" }}</div>
-            <div class="col-3 ml-auto">
+            <div class="col-3">{{ raceName || "No race selected" }}</div>
+            <div class="col-3">{{ currentClass || "No class selected" }}</div>
+            <div class="col-3"></div>
+            <div class="col-12">Stats:</div>
+            <div class="col-3">Dodge chance {{ dodgeChance }}</div>
+            <!-- <div class="col-3 ml-auto">
               <button
                 type="submit"
                 class="btn btn-outline-primary btn-sm ml-auto"
                 @click.prevent="createNewCharacter"
                 :disabled="isButtonDisabled"
               >Create</button>
-            </div>
+            </div>-->
           </div>
         </div>
       </div>

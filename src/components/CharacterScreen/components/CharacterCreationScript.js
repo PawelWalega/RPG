@@ -1,57 +1,12 @@
+import { allRaces } from '../../../data/allRaces';
+import { allClasses } from '../../../data/allClasses';
+import { calculateDodgeChance } from '../../../data/CharacterSheet';
+
 export default {
 	data() {
 		return {
-			classes              : [
-				{
-					name    : 'Mage',
-					talents : {
-						tier1 : [
-							{
-								name    : 'Frost Bolt',
-								tooltip : 'Cast a bolt of frost at your oponent'
-							},
-							{
-								name    : 'Fire Bolt',
-								tooltip : 'Cast a bolt of fire at your oponent'
-							}
-						],
-						tier2 : [
-							{ name: 'MAGE Tier 2 Tal1', tooltip: 'Talent Tooltip' },
-							{ name: 'MAGE Tier 2 Tal2', tooltip: 'Talent Tooltip' }
-						],
-						tier3 : [
-							{ name: 'MAGE Tier 3 Tal1', tooltip: 'Talent Tooltip' },
-							{ name: 'MAGE Tier 3 Tal2', tooltip: 'Talent Tooltip' }
-						]
-					}
-				},
-				{
-					name    : 'Warrior',
-					talents : {
-						tier1 : [
-							{
-								name    : 'Sword Attack',
-								tooltip : 'Swing at your oponent with increased damage'
-							},
-							{
-								name    : 'Shield Bash',
-								tooltip :
-									'Hit oponent with your shield with an increased chance to hit'
-							}
-						],
-						tier2 : [
-							{ name: 'WARRIOR Tier 2 Tal1', tooltip: 'Talent Tooltip' },
-							{ name: 'WARRIOR Tier 2 Tal2', tooltip: 'Talent Tooltip' }
-						],
-						tier3 : [
-							{ name: 'WARRIOR Tier 3 Tal1', tooltip: 'Talent Tooltip' },
-							{ name: 'WARRIOR Tier 3 Tal2', tooltip: 'Talent Tooltip' }
-						]
-					}
-				}
-				// 'Ranger',
-				// 'Knight'
-			],
+			allRaces,
+			allClasses,
 			character            : {
 				name            : '',
 				int             : 7,
@@ -69,12 +24,6 @@ export default {
 				vit : 0
 			},
 			pointsLeft           : 10,
-			races                : [
-				{ race: 'Human', modifiers: { int: 0, vit: 0, str: 0, agi: 0 } },
-				{ race: 'Dwarf', modifiers: { int: 0, vit: 2, str: 2, agi: 0 } },
-				{ race: 'Elf', modifiers: { int: 0, vit: 0, str: 0, agi: 4 } },
-				{ race: 'High-Elf', modifiers: { int: 4, vit: 0, str: 0, agi: 0 } }
-			],
 			selectedClass        : null,
 			submitButtonDisabled : true,
 			pointsLeftModified   : false
@@ -92,8 +41,8 @@ export default {
 				this.selectedClass = null;
 			} else {
 				this.character.class = event.target.value;
-				this.selectedClass = this.classes.filter(
-					(c) => c.name === this.character.class
+				this.selectedClass = this.allClasses.filter(
+					(c) => c.identifier === this.character.class
 				)[0];
 				const talents = this.selectedClass.talents;
 				for (let tal in talents) {
@@ -132,10 +81,11 @@ export default {
 		},
 
 		raceSelected         : function(event) {
-			if (event.target.value === 'Select a race:') {
+			const race = event.target.value;
+			if (race === 'Select a race:') {
 				this.character.race = null;
 			} else {
-				if (event.target.value === 'Human') {
+				if (race === 'human') {
 					if (!this.pointsLeftModified) {
 						this.pointsLeftModified = true;
 						this.pointsLeft += 4;
@@ -146,7 +96,7 @@ export default {
 						this.pointsLeftModified = false;
 					}
 				}
-				this.character.race = event.target.value;
+				this.character.race = this.allRaces[race];
 			}
 		}
 	},
@@ -168,24 +118,31 @@ export default {
 			return this.character.vit;
 		},
 		currentClass() {
-			return this.character.class;
+			return this.selectedClass ? this.selectedClass.name : false;
+		},
+		raceName() {
+			return this.character.race ? this.character.race.name : false;
 		},
 		selectedRace() {
-			return this.character.race;
+			return this.character.race ? this.character.race.identifier : false;
 		},
 		classNotSelected() {
 			return this.selectedClass ? true : false;
+		},
+		// Stats:
+		dodgeChance() {
+			return calculateDodgeChance(this.character.agi, this.character.int);
 		}
 	},
 
 	watch    : {
-		selectedRace : function() {
-			const race = this.races.filter((r) => r.race === this.character.race);
+		selectedRace : function(value) {
+			const race = this.allRaces[value];
 			if (race) {
 				for (let mod in this.classModifiers) {
 					this.character[mod] -= this.classModifiers[mod];
 				}
-				const newModifiers = race[0].modifiers;
+				const newModifiers = race.modifiers;
 				for (let mod in newModifiers) {
 					this.character[mod] += newModifiers[mod];
 					this.classModifiers[mod] = newModifiers[mod];
