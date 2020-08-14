@@ -1,12 +1,169 @@
 <template>
-  <div>{{ text }}</div>
+  <div class="row">
+    <div class="col">
+      <div class="row">
+        <!-- SELECTIGN NAME, CLASS AND RACE -->
+        <!-- -------------------------- -->
+        <div class="mb-3 col-4">
+          <label class="form-label">Character name:</label>
+          <input type="text" class="form-control-sm" v-model="character.name" />
+        </div>
+        <div class="mb-3 col-4">
+          <select class="form-select form-select-sm" @change="classSelected($event)">
+            <option>Select a class:</option>
+            <option v-for="(charClass, idx) in classes" :key="idx">{{ charClass.name }}</option>
+          </select>
+        </div>
+        <div class="mb-3 col-4">
+          <select class="form-select form-select-sm" @change="raceSelected($event)">
+            <option>Select a race:</option>
+            <option v-for="(race, idx) in races" :key="idx">{{ race.race }}</option>
+          </select>
+        </div>
+        <!-- TALENTS -->
+        <!-- -------------------------------------------- -->
+        <div class="mb-3 col-4">
+          <label class="form-label">Select Talent #1 (hover for details):</label>
+          <select v-if="!classNotSelected" class="form-select form-select-sm">
+            <option>Select a class first!</option>
+          </select>
+
+          <select v-else class="form-select form-select-sm" @change="talentSelected($event)">
+            <option
+              v-for="(talent, name) in selectedClass.talents1"
+              :key="name"
+              data-toggle="tooltip"
+              data-placement="top"
+              :title="talent"
+            >{{ name }}</option>
+          </select>
+        </div>
+
+        <div class="mb-3 col-4">
+          <label class="form-label">Select Talent #2 (hover for details):</label>
+          <select v-if="!classNotSelected" class="form-select form-select-sm">
+            <option>Select a class first!</option>
+          </select>
+
+          <select v-else class="form-select form-select-sm" @change="talentSelected($event)">
+            <option
+              v-for="(talent, name) in selectedClass.talents2"
+              :key="name"
+              data-toggle="tooltip"
+              data-placement="top"
+              :title="talent"
+            >{{ name }}</option>
+          </select>
+        </div>
+
+        <div class="mb-3 col-4">
+          <label class="form-label">Select Talent #3 (hover for details):</label>
+          <select v-if="!classNotSelected" class="form-select form-select-sm">
+            <option>Select a class first!</option>
+          </select>
+
+          <select v-else class="form-select form-select-sm" @change="talentSelected($event)">
+            <option
+              v-for="(talent, name) in selectedClass.talents3"
+              :key="name"
+              data-toggle="tooltip"
+              data-placement="top"
+              :title="talent"
+            >{{ name }}</option>
+          </select>
+        </div>
+
+        <!-- Attribute Selection -->
+        <!-- --------------------------------------- -->
+        <div class="mb-3 col-3 text-center">
+          <div class="mb-3 mx-auto">Strength:</div>
+          <button
+            class="btn btn-sm btn-outline-dark"
+            data-stat="str"
+            data-action="add"
+            @click.prevent="btnClicked($event)"
+          >+</button>
+          <span class="mx-2">{{ strength }}</span>
+          <button
+            class="btn btn-sm btn-outline-dark"
+            data-stat="str"
+            data-action="subtract"
+            @click.prevent="btnClicked($event)"
+          >-</button>
+        </div>
+
+        <div class="mb-3 col-3 text-center">
+          <div class="mb-3 mx-auto">Agility:</div>
+          <button
+            class="btn btn-sm btn-outline-dark"
+            data-stat="agi"
+            data-action="add"
+            @click.prevent="btnClicked($event)"
+          >+</button>
+          <span class="mx-2">{{ agility }}</span>
+          <button
+            class="btn btn-sm btn-outline-dark"
+            data-stat="agi"
+            data-action="subtract"
+            @click.prevent="btnClicked($event)"
+          >-</button>
+        </div>
+
+        <div class="mb-3 col-3 text-center">
+          <div class="mb-3 mx-auto">Inteligence:</div>
+          <button
+            class="btn btn-sm btn-outline-dark"
+            data-stat="int"
+            data-action="add"
+            @click.prevent="btnClicked($event)"
+          >+</button>
+          <span class="mx-2">{{ inteligence }}</span>
+          <button
+            class="btn btn-sm btn-outline-dark"
+            data-stat="int"
+            data-action="subtract"
+            @click.prevent="btnClicked($event)"
+          >-</button>
+        </div>
+
+        <div class="mb-3 col-3 text-center">
+          <div class="mb-3 mx-auto">Vitality:</div>
+          <button
+            class="btn btn-sm btn-outline-dark"
+            data-stat="vit"
+            data-action="add"
+            @click.prevent="btnClicked($event)"
+          >+</button>
+          <span class="mx-2">{{ vitality }}</span>
+          <button
+            class="btn btn-sm btn-outline-dark"
+            data-stat="vit"
+            data-action="subtract"
+            @click.prevent="btnClicked($event)"
+          >-</button>
+        </div>
+
+        <!-- Displaying curently selected stuff -->
+        <!-- ---------------------------------------------------- -->
+        <div class="col-12 mt-5 pt-2">
+          Info:
+          <div class="row">
+            <div class="col-3">Points left: {{ pointsLeft }}</div>
+            <div class="col-3">Selected Class: {{ character.name || "No class selected" }}</div>
+            <div class="col-3">Selected Race: {{ selectedRace || "No race selected" }}</div>
+            <div class="col-3 ml-auto">
+              <button
+                type="submit"
+                class="btn btn-outline-primary btn-sm ml-auto"
+                @click.prevent="createNewCharacter"
+                :disabled="isButtonDisabled"
+              >Create</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
-<script>
-export default {
-  data() {
-    return {
-      text: "Create new character",
-    };
-  },
-};
+<script src='./CharacterCreationScript.js'>
 </script>

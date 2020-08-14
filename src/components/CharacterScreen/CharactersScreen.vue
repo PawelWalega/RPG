@@ -7,17 +7,11 @@
 import charactersScreen from "./components/Characters.vue";
 import characterCreation from "./components/CharacterCreation.vue";
 import { EventBus } from "../EventBus";
-
 export default {
-  data() {
-    return {
-      characters: [
-        { name: "Ataldea" },
-        { name: "Bratford" },
-        { name: "Alexa" },
-      ],
-      creatingNewCharacter: false,
-    };
+  computed: {
+    characters() {
+      return this.$store.state.characters;
+    },
   },
   components: {
     charactersScreen,

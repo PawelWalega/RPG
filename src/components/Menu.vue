@@ -3,16 +3,19 @@
     <div class="row row-cols-1 gy-3 gx-0 px-1">
       <div
         class="col border border-dark py-4 justify-content-center align-items-center d-flex flex-column rounded shadow-sm hover-link"
+        @click="changeScreen( 'characters' )"
       >
         <img :src="icons.knightIcon" class="icon" />
       </div>
       <div
         class="col border border-dark py-4 justify-content-center align-items-center d-flex flex-column rounded shadow-sm hover-link"
+        @click="changeScreen( 'battle' )"
       >
         <img :src="icons.fightIcon" class="icon" />
       </div>
       <div
         class="col border border-dark py-4 justify-content-center align-items-center d-flex flex-column rounded shadow-sm hover-link"
+        @click="changeScreen( 'rules' )"
       >
         <img :src="icons.bookIcon" class="icon" />
       </div>
@@ -25,6 +28,8 @@
   </div>
 </template>
 <script>
+import { mapMutations } from "vuex";
+
 export default {
   data() {
     return {
@@ -35,6 +40,9 @@ export default {
         doorIcon: require("./../assets/door.svg"),
       },
     };
+  },
+  methods: {
+    ...mapMutations(["changeScreen"]),
   },
 };
 </script>

@@ -10,11 +10,6 @@ import singleCharacter from "./SingleCharacter.vue";
 
 export default {
   props: ["characters"],
-  data() {
-    return {
-      text: "All Characters",
-    };
-  },
   components: {
     createCharacterButton,
     singleCharacter,
