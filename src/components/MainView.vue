@@ -7,8 +7,8 @@
 </template>
 <script >
 import charactersScreen from "./CharacterScreen/CharactersScreen.vue";
-import battleScreen from "./Battle/BattleScreen.vue";
-import appRules from "./Rules/Rules.vue";
+import battleScreen from "./BattleScreen/BattleScreen.vue";
+import appRules from "./RulesScreen/Rules.vue";
 
 export default {
   data() {

@@ -6,11 +6,15 @@
         <!-- -------------------------- -->
         <div class="mb-3 col-4">
           <label class="form-label">Character name:</label>
-          <input type="text" class="form-control-sm" v-model="character.name" />
+          <input type="text" :id="INPUTS.NAME" class="form-control-sm" v-model="character.name" />
         </div>
 
         <div class="mb-3 col-4">
-          <select class="form-select form-select-sm" @change="raceSelected($event)">
+          <select
+            class="form-select form-select-sm"
+            :id="INPUTS.RACE"
+            @change="raceSelected($event)"
+          >
             <option>Select a race:</option>
             <option
               v-for="(race, val) in allRaces"
@@ -21,7 +25,11 @@
         </div>
 
         <div class="mb-3 col-4">
-          <select class="form-select form-select-sm" @change="classSelected($event)">
+          <select
+            class="form-select form-select-sm"
+            :id="INPUTS.CLASS"
+            @change="classSelected($event)"
+          >
             <option>Select a class:</option>
             <option
               v-for="(charClass, idx) in allClasses"
@@ -161,20 +169,29 @@
         <div class="col-12 mt-5 pt-2">
           Info:
           <div class="row">
-            <div class="col-3">Points left: {{ pointsLeft }}</div>
+            <div
+              class="col-3"
+              :id="INPUTS.POINTS_LEFT"
+              style="border: 1px solid gray; border-radius: .25rem"
+            >Points left: {{ pointsLeft }}</div>
             <div class="col-3">{{ raceName || "No race selected" }}</div>
             <div class="col-3">{{ currentClass || "No class selected" }}</div>
             <div class="col-3"></div>
             <div class="col-12">Stats:</div>
-            <div class="col-3">Dodge chance {{ dodgeChance }}</div>
-            <!-- <div class="col-3 ml-auto">
+            <div class="col-2">Dodge Chance: {{ dodgeChance }}%</div>
+            <div class="col-2">Defense Rating: {{ defenseRating | toSemiInteger }}</div>
+            <div class="col-2">Attack Power: {{ attackPower | toSemiInteger }}</div>
+            <div class="col-2">Magic Power: {{ magicPower | toInteger }}</div>
+            <div class="col-2">Health Points: {{ healthPoints | toSemiInteger }}</div>
+            <div class="col-3 ml-auto">
               <button
                 type="submit"
                 class="btn btn-outline-primary btn-sm ml-auto"
                 @click.prevent="createNewCharacter"
                 :disabled="isButtonDisabled"
               >Create</button>
-            </div>-->
+              <div id="errorContainer" class="errorContainer errorAnimation displayNone"></div>
+            </div>
           </div>
         </div>
       </div>

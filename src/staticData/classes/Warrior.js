@@ -15,7 +15,11 @@ export const warrior = {
 		],
 		tier2 : [
 			{ name: 'WARRIOR Tier 2 Tal1', tooltip: 'Talent Tooltip' },
-			{ name: 'WARRIOR Tier 2 Tal2', tooltip: 'Talent Tooltip' }
+			{
+				name    : 'Power Blow',
+				tooltip :
+					'Take a huge swing that deals significant damage if you hit but lowers your defens for next round'
+			}
 		],
 		tier3 : [
 			{ name: 'WARRIOR Tier 3 Tal1', tooltip: 'Talent Tooltip' },

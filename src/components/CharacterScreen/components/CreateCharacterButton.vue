@@ -5,7 +5,7 @@
   >New Character</button>
 </template>
 <script>
-import { EventBus } from "../../EventBus";
+import { EventBus } from "../../../utils/EventBus";
 export default {
   data() {
     return {

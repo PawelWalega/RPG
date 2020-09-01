@@ -6,8 +6,13 @@
 <script>
 import charactersScreen from "./components/Characters.vue";
 import characterCreation from "./components/CharacterCreation.vue";
-import { EventBus } from "../EventBus";
+import { EventBus } from "../../utils/EventBus";
 export default {
+  data() {
+    return {
+      creatingNewCharacter: false,
+    };
+  },
   computed: {
     characters() {
       return this.$store.state.characters;

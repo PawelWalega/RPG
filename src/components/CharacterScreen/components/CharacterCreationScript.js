@@ -1,22 +1,22 @@
-import { allRaces } from '../../../data/allRaces';
-import { allClasses } from '../../../data/allClasses';
-import { calculateDodgeChance } from '../../../data/CharacterSheet';
+import { allRaces } from '../../../staticData/allRaces';
+import { allClasses } from '../../../staticData/allClasses';
+import { emptyCharacterSheet as character } from '../../../utils/emptyCharacterSheet';
+import {
+	calculateDodgeChance,
+	calculateDefenseRating,
+	calculateHealthPoints,
+	calculateAttackPower
+} from '../../../staticData/CharacterSheet';
+import { createNewCharacter } from '../../../functionDefinitions/CharacterCreationFunction';
+import { INPUTS } from '../../../enums/inputs';
 
 export default {
 	data() {
 		return {
+			INPUTS,
 			allRaces,
 			allClasses,
-			character            : {
-				name            : '',
-				int             : 7,
-				str             : 8,
-				agi             : 7,
-				vit             : 8,
-				class           : null,
-				race            : null,
-				selectedTalents : { tier1: '', tier2: '', tier3: '' }
-			},
+			character,
 			classModifiers       : {
 				int : 0,
 				str : 0,
@@ -32,7 +32,22 @@ export default {
 
 	methods  : {
 		createNewCharacter() {
-			console.log(this.character);
+			this.clearBorders();
+			createNewCharacter(
+				this.character,
+				this.pointsLeft,
+				document.getElementById('errorContainer')
+			);
+		},
+
+		clearBorders() {
+			const allInputElements = [];
+			for (let input in this.INPUTS) {
+				allInputElements.push(this.INPUTS[input]);
+			}
+			allInputElements.forEach((el) => {
+				document.getElementById(el).style.borderColor = 'gray';
+			});
 		},
 
 		classSelected(event) {
@@ -70,8 +85,15 @@ export default {
 				this.character[event.target.dataset.stat] += 1;
 				this.pointsLeft -= 1;
 			} else if (event.target.dataset.action === 'subtract') {
-				if (this.character[event.target.dataset.stat] === 5) {
-					alert("You can't lower stat below 5!");
+				if (
+					this.character[event.target.dataset.stat] ===
+					5 + this.classModifiers[event.target.dataset.stat]
+				) {
+					alert(
+						`You can't lower this stat below ${this.character[
+							event.target.dataset.stat
+						]}!`
+					);
 					return;
 				} else {
 					this.character[event.target.dataset.stat] -= 1;
@@ -129,9 +151,29 @@ export default {
 		classNotSelected() {
 			return this.selectedClass ? true : false;
 		},
+		mainStat() {
+			return this.character.str >= this.character.agi
+				? this.character.str
+				: this.character.agi;
+		},
 		// Stats:
 		dodgeChance() {
 			return calculateDodgeChance(this.character.agi, this.character.int);
+		},
+		defenseRating() {
+			return calculateDefenseRating(
+				this.character.str,
+				this.character.armor
+			);
+		},
+		healthPoints() {
+			return calculateHealthPoints(this.character.vit, this.character.str);
+		},
+		magicPower() {
+			return this.character.int * 10;
+		},
+		attackPower() {
+			return calculateAttackPower(this.mainStat);
 		}
 	},
 

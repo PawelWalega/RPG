@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import App from './App.vue';
 import Vuex from 'vuex';
-import { store } from './Store';
+import { store } from './store/Store';
+import './utils/filters';
 
 Vue.use(Vuex);
 Vue.config.productionTip = false;
