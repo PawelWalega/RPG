@@ -46,7 +46,7 @@ export default {
 				allInputElements.push(this.INPUTS[input]);
 			}
 			allInputElements.forEach((el) => {
-				document.getElementById(el).style.borderColor = 'gray';
+				document.getElementById(el).style.borderColor = '#ced4da';
 			});
 		},
 

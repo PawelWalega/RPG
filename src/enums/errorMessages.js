@@ -12,9 +12,8 @@ export const ERRORS = {
 			MINIMUM        : 'This attribute cannot be lower'
 		},
 		GENERAL    : {
-			NO_CLASS  : 'Please select a class.',
-			NO_RACE   : 'Please select a race.',
-			NO_TALENT : 'Please select all talents.'
+			NO_CLASS : 'Please select a class.',
+			NO_RACE  : 'Please select a race.'
 		}
 	}
 };

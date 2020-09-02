@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-10">
+  <div class="col-md-10 px-3 py-2 border border-secondary rounded-sm">
     <characters-screen v-if="page === 'characters'"></characters-screen>
     <battle-screen v-if="page === 'battle'"></battle-screen>
     <app-rules v-if="page === 'rules'"></app-rules>

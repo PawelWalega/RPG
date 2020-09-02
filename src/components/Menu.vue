@@ -1,29 +1,27 @@
 <template>
-  <div class="col-md-2 p-0">
-    <div class="row row-cols-1 gy-3 gx-0 px-1">
-      <div
-        class="col border border-dark py-4 justify-content-center align-items-center d-flex flex-column rounded shadow-sm hover-link"
-        @click="changeScreen( 'characters' )"
-      >
-        <img :src="icons.knightIcon" class="icon" />
-      </div>
-      <div
-        class="col border border-dark py-4 justify-content-center align-items-center d-flex flex-column rounded shadow-sm hover-link"
-        @click="changeScreen( 'battle' )"
-      >
-        <img :src="icons.fightIcon" class="icon" />
-      </div>
-      <div
-        class="col border border-dark py-4 justify-content-center align-items-center d-flex flex-column rounded shadow-sm hover-link"
-        @click="changeScreen( 'rules' )"
-      >
-        <img :src="icons.bookIcon" class="icon" />
-      </div>
-      <div
-        class="col border border-dark py-4 justify-content-center align-items-center d-flex flex-column rounded shadow-sm hover-link"
-      >
-        <img :src="icons.doorIcon" class="icon" />
-      </div>
+  <div class="col-md-2 px-2 d-flex flex-column justify-content-between">
+    <div
+      class="border border-dark py-4 justify-content-center align-items-center d-flex flex-column rounded shadow-sm hover-link"
+      @click="changeScreen( 'characters' )"
+    >
+      <img :src="icons.knightIcon" class="icon" />
+    </div>
+    <div
+      class="border border-dark py-4 justify-content-center align-items-center d-flex flex-column rounded shadow-sm hover-link"
+      @click="changeScreen( 'battle' )"
+    >
+      <img :src="icons.fightIcon" class="icon" />
+    </div>
+    <div
+      class="border border-dark py-4 justify-content-center align-items-center d-flex flex-column rounded shadow-sm hover-link"
+      @click="changeScreen( 'rules' )"
+    >
+      <img :src="icons.bookIcon" class="icon" />
+    </div>
+    <div
+      class="border border-dark py-4 justify-content-center align-items-center d-flex flex-column rounded shadow-sm hover-link"
+    >
+      <img :src="icons.doorIcon" class="icon" />
     </div>
   </div>
 </template>
@@ -48,8 +46,8 @@ export default {
 </script>
 <style scoped lang="scss">
 .icon {
-  width: 3rem;
-  height: 3rem;
+  width: 4.5rem;
+  height: 4.5rem;
   fill: #000;
 }
 .hover-link {

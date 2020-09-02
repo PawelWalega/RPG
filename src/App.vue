@@ -22,6 +22,14 @@ export default {
 };
 </script>
 <style>
+@font-face {
+  font-family: "Ringbearer";
+  src: url("./assets/ringbearer.ttf") format("truetype");
+}
+body {
+  font-family: "Ringbearer", Fallback, sans-serif;
+  font-size: 20px;
+}
 .errorContainer {
   position: fixed;
   padding: 4rem 8rem;
