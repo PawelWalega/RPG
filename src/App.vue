@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <div class="container">
-      <div class="row py-5">
+    <div class="container mt-5 px-4">
+      <div class="row gx-5">
         <app-menu></app-menu>
         <main-view></main-view>
       </div>

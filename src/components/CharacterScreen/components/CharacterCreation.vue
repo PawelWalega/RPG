@@ -3,12 +3,12 @@
     <div class="row mb-3">
       <!-- SELECTIGN NAME, CLASS AND RACE -->
       <!-- -------------------------- -->
-      <div class="mb-3 col-4 d-flex flex-column">
+      <div class="mb-3 col-4 d-flex flex-column align-items-center">
         <label class="form-label">Character name:</label>
         <input type="text" :id="INPUTS.NAME" class="form-control" v-model="character.name" />
       </div>
 
-      <div class="mb-3 col-4 d-flex flex-column">
+      <div class="mb-3 col-4 d-flex flex-column align-items-center">
         <label class="form-label">Race:</label>
         <select class="form-select form-select-sm" :id="INPUTS.RACE" @change="raceSelected($event)">
           <option>Select a race:</option>
@@ -20,7 +20,7 @@
         </select>
       </div>
 
-      <div class="mb-3 col-4 d-flex flex-column">
+      <div class="mb-3 col-4 d-flex flex-column align-items-center">
         <label class="form-label">Class:</label>
         <select
           class="form-select form-select-sm"
@@ -31,7 +31,7 @@
           <option
             v-for="(charClass, idx) in allClasses"
             :key="idx"
-            :value="charClass.identifier"
+            :value="charClass.name"
           >{{ charClass.name }}</option>
         </select>
       </div>
@@ -39,7 +39,7 @@
     <!-- TALENTS -->
     <!-- -------------------------------------------- -->
     <div class="row mb-3">
-      <div class="mb-3 col-4">
+      <div class="mb-3 col-4 d-flex flex-column align-items-center">
         <label class="form-label">Basic Attack:</label>
         <select v-if="!classNotSelected" class="form-select form-select-sm">
           <option>Select a class first!</option>
@@ -57,7 +57,7 @@
         </select>
       </div>
 
-      <div class="mb-3 col-4">
+      <div class="mb-3 col-4 d-flex flex-column align-items-center">
         <label class="form-label">Special Attack:</label>
         <select v-if="!classNotSelected" class="form-select form-select-sm">
           <option>Select a class first!</option>
@@ -75,7 +75,7 @@
         </select>
       </div>
 
-      <div class="mb-3 col-4">
+      <div class="mb-3 col-4 d-flex flex-column align-items-center">
         <label class="form-label">Defensive Ability:</label>
         <select v-if="!classNotSelected" class="form-select form-select-sm">
           <option>Select a class first!</option>
@@ -99,7 +99,7 @@
     <div class="row">
       <div class="col-12">
         <div class="row">
-          <div class="mt-3 col-3 d-flex flex-column align-items-center">
+          <div class="mt-3 col-3 d-flex flex-column align-items-center align-items-center">
             <div class="mx-auto">Strength:</div>
             <div class="d-flex align-items-center">
               <button
@@ -118,7 +118,7 @@
             </div>
           </div>
 
-          <div class="mt-3 col-3 d-flex flex-column align-items-center">
+          <div class="mt-3 col-3 d-flex flex-column align-items-center align-items-center">
             <div class="mx-auto">Agility:</div>
             <div class="d-flex align-items-center">
               <button
@@ -137,7 +137,7 @@
             </div>
           </div>
 
-          <div class="mt-3 col-3 d-flex flex-column align-items-center">
+          <div class="mt-3 col-3 d-flex flex-column align-items-center align-items-center">
             <div class="mx-auto">Inteligence:</div>
             <div class="d-flex align-items-center">
               <button
@@ -156,8 +156,8 @@
             </div>
           </div>
 
-          <div class="mt-3 col-3 d-flex flex-column align-items-center">
-            <div class="mx-auto">Strength:</div>
+          <div class="mt-3 col-3 d-flex flex-column align-items-center align-items-center">
+            <div class="mx-auto">Vitality:</div>
             <div class="d-flex align-items-center">
               <button
                 class="btn btn-sm btn-outline-dark"
@@ -181,22 +181,44 @@
     <!-- ---------------------------------------------------- -->
     <div class="col-12 mt-5 pt-2">
       <div class="row">
-        <div class="col-4" :id="INPUTS.POINTS_LEFT">Points left: {{ pointsLeft }}</div>
+        <div
+          class="col-4 d-flex align-items-center justify-content-around"
+          :id="INPUTS.POINTS_LEFT"
+          style="border: 1px solid transparent; border-radius: .25rem"
+        >
+          <div>Points left:</div>
+          <div class="attribute">{{ pointsLeft }}</div>
+        </div>
 
-        <div class="col-4">Dodge Chance: {{ dodgeChance }}%</div>
-        <div class="col-4">Defense Rating: {{ defenseRating | toSemiInteger }}</div>
-        <div class="col-4">Attack Power: {{ attackPower | toSemiInteger }}</div>
-        <div class="col-4">Magic Power: {{ magicPower | toInteger }}</div>
-        <div class="col-4">Health Points: {{ healthPoints | toSemiInteger }}</div>
-      </div>
-      <div class="col-3 ml-auto">
-        <button
-          type="submit"
-          class="btn btn-outline-primary btn-lg ml-auto"
-          @click.prevent="createNewCharacter"
-          :disabled="isButtonDisabled"
-        >Create Character</button>
-        <div id="errorContainer" class="errorContainer errorAnimation displayNone"></div>
+        <div class="col-4 d-flex align-items-center justify-content-around">
+          Dodge Chance:
+          <div class="attribute">{{ dodgeChance }}%</div>
+        </div>
+        <div class="col-4 d-flex align-items-center justify-content-around">
+          <div>Defense Rating:</div>
+          <div class="attribute">{{ defenseRating | toSemiInteger }}</div>
+        </div>
+        <div class="col-4 d-flex align-items-center justify-content-around">
+          <div>Attack Power:</div>
+          <div class="attribute">{{ attackPower | toSemiInteger }}</div>
+        </div>
+        <div class="col-4 d-flex align-items-center justify-content-around">
+          <div>Magic Power:</div>
+          <div class="attribute">{{ magicPower | toInteger }}</div>
+        </div>
+        <div class="col-4 d-flex align-items-center justify-content-around">
+          <div>Health Points:</div>
+          <div class="attribute">{{ healthPoints | toSemiInteger }}</div>
+        </div>
+        <div class="col-3 ml-auto mt-4">
+          <button
+            type="submit"
+            class="btn btn-outline-success btn-lg ml-5 mt-3"
+            @click.prevent="createNewCharacter"
+            :disabled="isButtonDisabled"
+          >Create Character</button>
+          <div id="errorContainer" class="errorContainer errorAnimation displayNone"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -210,5 +232,6 @@
 .form-select,
 .form-control {
   font-size: 16px;
+  width: 75%;
 }
 </style>

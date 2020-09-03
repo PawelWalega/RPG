@@ -1,7 +1,6 @@
 export const warrior = {
-	name       : 'Warrior',
-	identifier : 'warrior',
-	talents    : {
+	name    : 'Warrior',
+	talents : {
 		tier1 : [
 			{
 				name    : 'Sword Attack',

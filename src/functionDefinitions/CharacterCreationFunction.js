@@ -2,6 +2,7 @@ import { ERRORS } from '../enums/errorMessages';
 import { INPUTS } from '../enums/inputs';
 import { Character } from '../classDefinitions/characterClass';
 import { errorAnimationDuration } from '../utils/constants';
+import { store } from '../store/Store';
 
 const displayError = function(error, errorElement) {
 	errorElement.innerText = error;
@@ -23,6 +24,7 @@ export const createNewCharacter = function(
 	pointsLeft,
 	errorElement
 ) {
+	console.log(character);
 	if (!character.name) {
 		trowError(
 			ERRORS.CHARACTER_CREATION.NAME.NO_NAME,
@@ -75,5 +77,5 @@ export const createNewCharacter = function(
 	}
 
 	const newCharacter = new Character(character);
-	console.log(newCharacter);
+	store.commit('createNewCharacter', newCharacter);
 };

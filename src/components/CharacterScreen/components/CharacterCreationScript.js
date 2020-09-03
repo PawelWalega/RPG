@@ -6,7 +6,7 @@ import {
 	calculateDefenseRating,
 	calculateHealthPoints,
 	calculateAttackPower
-} from '../../../staticData/CharacterSheet';
+} from '../../../staticData/calculatorFunctions';
 import { createNewCharacter } from '../../../functionDefinitions/CharacterCreationFunction';
 import { INPUTS } from '../../../enums/inputs';
 
@@ -30,6 +30,10 @@ export default {
 		};
 	},
 
+	created() {
+		this.character.name = '';
+	},
+
 	methods  : {
 		createNewCharacter() {
 			this.clearBorders();
@@ -46,7 +50,8 @@ export default {
 				allInputElements.push(this.INPUTS[input]);
 			}
 			allInputElements.forEach((el) => {
-				document.getElementById(el).style.borderColor = '#ced4da';
+				document.getElementById(el).style.borderColor =
+					el === INPUTS.POINTS_LEFT ? 'transparent' : '#ced4da';
 			});
 		},
 
@@ -57,10 +62,10 @@ export default {
 			} else {
 				this.character.class = event.target.value;
 				this.selectedClass = this.allClasses.filter(
-					(c) => c.identifier === this.character.class
+					(c) => c.name === this.character.class
 				)[0];
 				const talents = this.selectedClass.talents;
-				for (let tal in talents) {
+				for (const tal in talents) {
 					this.character.selectedTalents[tal] = talents[tal][0]['name'];
 				}
 			}

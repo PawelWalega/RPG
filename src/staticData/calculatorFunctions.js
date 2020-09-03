@@ -25,7 +25,7 @@ export const calculateHealthPoints = function(vit, str, mods = null) {
 export const calculateAttackPower = function(mainStat, mods = null) {
 	if (mods) {
 		const sum = mods.reduce((acc, curr) => acc + curr);
-		return (mainStat * 0.75 + sum).toFixed(2);
+		return (mainStat * 7.5 + sum).toFixed(2);
 	}
-	return (mainStat * 0.75).toFixed(2);
+	return (mainStat * 7.5).toFixed(2);
 };

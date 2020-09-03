@@ -1,7 +1,6 @@
 export const mage = {
-	name       : 'Mage',
-	identifier : 'mage',
-	talents    : {
+	name    : 'Mage',
+	talents : {
 		tier1 : [
 			{
 				name    : 'Frost Bolt',
