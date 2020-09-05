@@ -1,6 +1,5 @@
 import { allRaces } from '../../../staticData/allRaces';
 import { allClasses } from '../../../staticData/allClasses';
-import { emptyCharacterSheet as character } from '../../../utils/emptyCharacterSheet';
 import {
 	calculateDodgeChance,
 	calculateDefenseRating,
@@ -9,6 +8,7 @@ import {
 } from '../../../staticData/calculatorFunctions';
 import { createNewCharacter } from '../../../functionDefinitions/CharacterCreationFunction';
 import { INPUTS } from '../../../enums/inputs';
+import { EventBus } from '../../../utils/EventBus';
 
 export default {
 	data() {
@@ -16,8 +16,19 @@ export default {
 			INPUTS,
 			allRaces,
 			allClasses,
-			character,
-			classModifiers       : {
+			character            : {
+				name            : '',
+				int             : 7,
+				str             : 8,
+				agi             : 7,
+				vit             : 8,
+				class           : '',
+				race            : '',
+				armor           : 10,
+				hp              : 10,
+				selectedTalents : { tier1: '', tier2: '', tier3: '' }
+			},
+			raceModifiers        : {
 				int : 0,
 				str : 0,
 				agi : 0,
@@ -30,18 +41,18 @@ export default {
 		};
 	},
 
-	created() {
-		this.character.name = '';
-	},
-
 	methods  : {
 		createNewCharacter() {
 			this.clearBorders();
-			createNewCharacter(
-				this.character,
-				this.pointsLeft,
-				document.getElementById('errorContainer')
-			);
+			if (
+				createNewCharacter(
+					this.character,
+					this.pointsLeft,
+					document.getElementById('errorContainer')
+				)
+			) {
+				EventBus.$emit('character-created');
+			}
 		},
 
 		clearBorders() {
@@ -92,7 +103,7 @@ export default {
 			} else if (event.target.dataset.action === 'subtract') {
 				if (
 					this.character[event.target.dataset.stat] ===
-					5 + this.classModifiers[event.target.dataset.stat]
+					5 + this.raceModifiers[event.target.dataset.stat]
 				) {
 					alert(
 						`You can't lower this stat below ${this.character[
@@ -107,24 +118,23 @@ export default {
 			}
 		},
 
-		raceSelected         : function(event) {
-			const race = event.target.value;
-			if (race === 'Select a race:') {
-				this.character.race = null;
-			} else {
-				if (race === 'human') {
-					if (!this.pointsLeftModified) {
-						this.pointsLeftModified = true;
-						this.pointsLeft += 4;
-					}
-				} else {
-					if (this.pointsLeftModified) {
-						this.pointsLeft -= 4;
-						this.pointsLeftModified = false;
-					}
+		raceSelected(event) {
+			let race = event.target.value.toLowerCase();
+			if (race !== 'human') {
+				if (this.pointsLeftModified) {
+					this.pointsLeft -= 4;
+					this.pointsLeftModified = false;
 				}
-				this.character.race = this.allRaces[race];
+			} else {
+				if (!this.pointsLeftModified) {
+					this.pointsLeftModified = true;
+					this.pointsLeft += 4;
+				}
 			}
+			if (race === 'select a race:') {
+				race = '';
+			}
+			this.character.race = race;
 		}
 	},
 
@@ -144,14 +154,8 @@ export default {
 		vitality() {
 			return this.character.vit;
 		},
-		currentClass() {
-			return this.selectedClass ? this.selectedClass.name : false;
-		},
-		raceName() {
-			return this.character.race ? this.character.race.name : false;
-		},
 		selectedRace() {
-			return this.character.race ? this.character.race.identifier : false;
+			return this.character.race;
 		},
 		classNotSelected() {
 			return this.selectedClass ? true : false;
@@ -183,16 +187,16 @@ export default {
 	},
 
 	watch    : {
-		selectedRace : function(value) {
+		selectedRace(value) {
 			const race = this.allRaces[value];
 			if (race) {
-				for (let mod in this.classModifiers) {
-					this.character[mod] -= this.classModifiers[mod];
+				for (let mod in this.raceModifiers) {
+					this.character[mod] -= this.raceModifiers[mod];
 				}
 				const newModifiers = race.modifiers;
 				for (let mod in newModifiers) {
 					this.character[mod] += newModifiers[mod];
-					this.classModifiers[mod] = newModifiers[mod];
+					this.raceModifiers[mod] = newModifiers[mod];
 				}
 			}
 		}

@@ -26,9 +26,13 @@ export default {
     createNewCharacter() {
       this.creatingNewCharacter = true;
     },
+    showCharacters() {
+      this.creatingNewCharacter = false;
+    },
   },
   mounted() {
     EventBus.$on("new-character-button-clicked", this.createNewCharacter);
+    EventBus.$on("character-created", this.showCharacters);
   },
 };
 </script>

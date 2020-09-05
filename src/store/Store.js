@@ -13,6 +13,7 @@ export const store = new Vuex.Store({
 			state.page = payload;
 		},
 		createNewCharacter(state, payload) {
+			if (state.characters.length === 4) return;
 			state.characters.push(payload);
 		}
 	}

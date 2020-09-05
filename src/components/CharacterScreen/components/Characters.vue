@@ -1,5 +1,5 @@
 <template>
-  <div class="position-relative all-characters">
+  <div class="position-relative row">
     <single-character v-for="(char, i) in characters" :key="i" :character="char"></single-character>
     <create-character-button v-if="characters.length < 4"></create-character-button>
   </div>
@@ -17,10 +17,7 @@ export default {
 };
 </script>
 <style scoped>
-.all-characters {
+.row {
   height: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
 }
 </style>
