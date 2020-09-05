@@ -210,6 +210,13 @@
           <div>Health Points:</div>
           <div class="attribute">{{ healthPoints | toSemiInteger }}</div>
         </div>
+        <div class="col-3 mr-auto mt-4">
+          <button
+            class="btn btn-outline-danger btn-lg ml-5 mt-3"
+            @click.prevent="allCharactersScreen"
+            :disabled="isButtonDisabled"
+          >Back</button>
+        </div>
         <div class="col-3 ml-auto mt-4">
           <button
             type="submit"

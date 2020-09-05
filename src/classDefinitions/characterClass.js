@@ -1,6 +1,7 @@
 export class Character {
 	constructor(characterObject) {
 		this.name = characterObject.name;
+		this.race = characterObject.race;
 		this.str = characterObject.str;
 		this.agi = characterObject.agi;
 		this.vit = characterObject.vit;

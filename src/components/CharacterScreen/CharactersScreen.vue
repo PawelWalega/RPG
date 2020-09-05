@@ -33,6 +33,7 @@ export default {
   mounted() {
     EventBus.$on("new-character-button-clicked", this.createNewCharacter);
     EventBus.$on("character-created", this.showCharacters);
+    EventBus.$on("back-button-clicked", this.showCharacters);
   },
 };
 </script>

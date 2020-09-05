@@ -1,11 +1,6 @@
 import { allRaces } from '../../../staticData/allRaces';
 import { allClasses } from '../../../staticData/allClasses';
-import {
-	calculateDodgeChance,
-	calculateDefenseRating,
-	calculateHealthPoints,
-	calculateAttackPower
-} from '../../../staticData/calculatorFunctions';
+import { calculators } from '../../../staticData/calculatorFunctions';
 import { createNewCharacter } from '../../../functionDefinitions/CharacterCreationFunction';
 import { INPUTS } from '../../../enums/inputs';
 import { EventBus } from '../../../utils/EventBus';
@@ -43,6 +38,7 @@ export default {
 
 	methods  : {
 		createNewCharacter() {
+			console.log(this.character);
 			this.clearBorders();
 			if (
 				createNewCharacter(
@@ -135,6 +131,9 @@ export default {
 				race = '';
 			}
 			this.character.race = race;
+		},
+		allCharactersScreen() {
+			EventBus.$emit('back-button-clicked');
 		}
 	},
 
@@ -167,22 +166,28 @@ export default {
 		},
 		// Stats:
 		dodgeChance() {
-			return calculateDodgeChance(this.character.agi, this.character.int);
+			return calculators.calculateDodgeChance(
+				this.character.agi,
+				this.character.int
+			);
 		},
 		defenseRating() {
-			return calculateDefenseRating(
+			return calculators.calculateDefenseRating(
 				this.character.str,
 				this.character.armor
 			);
 		},
 		healthPoints() {
-			return calculateHealthPoints(this.character.vit, this.character.str);
+			return calculators.calculateHealthPoints(
+				this.character.vit,
+				this.character.str
+			);
 		},
 		magicPower() {
-			return this.character.int * 10;
+			return calculators.calculateMagicPower(this.character.int);
 		},
 		attackPower() {
-			return calculateAttackPower(this.mainStat);
+			return calculators.calculateAttackPower(this.mainStat);
 		}
 	},
 
