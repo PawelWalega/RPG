@@ -25,9 +25,11 @@ export const store = new Vuex.Store({
 		deleteCharacter(state, payload) {
 			state.characters.splice(payload, 1);
 		},
-		toBattle(state, payload) {
+		clearSelected(state) {
+			state.selectedChar = '';
+		},
+		selectCharacter(state, payload) {
 			state.selectedChar = payload;
-			store.commit('changeScreen', 'battle');
 		}
 	},
 	plugins   : [ vuexLocal.plugin ]

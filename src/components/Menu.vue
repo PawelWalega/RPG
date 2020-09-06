@@ -11,7 +11,7 @@
       </div>
       <div
         class="border border-dark py-4 justify-content-center align-items-center d-flex flex-column rounded shadow-sm hover-link"
-        @click="changeScreen( 'battle' )"
+        @click="battleScreen()"
       >
         <img :src="icons.fightIcon" class="icon mx-5" />
       </div>
@@ -31,6 +31,7 @@
 </template>
 <script>
 import { mapMutations } from "vuex";
+import { store } from "@/store/Store";
 
 export default {
   data() {
@@ -45,6 +46,10 @@ export default {
   },
   methods: {
     ...mapMutations(["changeScreen"]),
+    battleScreen() {
+      store.commit("clearSelected");
+      this.changeScreen("battle");
+    },
   },
 };
 </script>

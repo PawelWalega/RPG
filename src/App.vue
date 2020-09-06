@@ -13,12 +13,16 @@
 // ADD TOOLTIPS WHEN CREATING CHARACTER
 import Menu from "./components/Menu.vue";
 import MainView from "./components/MainView.vue";
+import { store } from "@/store/Store";
 
 export default {
   name: "App",
   components: {
     appMenu: Menu,
     mainView: MainView,
+  },
+  beforeCreate() {
+    store.commit("clearSelected");
   },
 };
 </script>

@@ -32,15 +32,21 @@ export default {
 			}
 		},
 		toBattle() {
-			store.commit('toBattle', this.character.name);
+			store.commit('selectCharacter', this.character.name);
+			store.commit('changeScreen', 'battle');
 		}
 	},
 	computed : {
+		mainStat() {
+			return this.character.str > this.character.agi
+				? this.character.str
+				: this.character.agi;
+		},
 		index() {
 			return store.state.characters.indexOf(this.character);
 		},
 		attackOrMagicString() {
-			return this.magicPower < this.attackPower ? 'Attack' : 'Magic';
+			return this.magicPower > this.attackPower ? 'Magic' : 'Attack';
 		},
 		attackOrMagic() {
 			return this.magicPower < this.attackPower

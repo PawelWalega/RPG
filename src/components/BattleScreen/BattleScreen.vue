@@ -1,3 +1,24 @@
 <template>
-  <div>BATTLE!</div>
+  <battle v-if="selectedChar" :character="charToBattle"></battle>
+  <character-selection v-else></character-selection>
 </template>
+<script>
+import { mapState } from "vuex";
+import battle from "./screens/battle/battle.vue";
+import characterSelection from "./screens/characterSelection/characterSelection.vue";
+export default {
+  components: {
+    battle,
+    characterSelection,
+  },
+  computed: {
+    ...mapState(["selectedChar", "characters"]),
+    charToBattle() {
+      const selectedChar = this.characters.find(
+        (char) => char.name === this.selectedChar
+      );
+      return selectedChar;
+    },
+  },
+};
+</script>
