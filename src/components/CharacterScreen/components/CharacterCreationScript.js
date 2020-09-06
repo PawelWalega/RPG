@@ -1,6 +1,6 @@
 import { allRaces } from '../../../staticData/allRaces';
 import { allClasses } from '../../../staticData/allClasses';
-import { calculators } from '../../../staticData/calculatorFunctions';
+import { calculators } from '../../../classDefinitions/calculatorFunctions';
 import { createNewCharacter } from '../../../functionDefinitions/CharacterCreationFunction';
 import { INPUTS } from '../../../enums/inputs';
 import { EventBus } from '../../../utils/EventBus';
@@ -38,7 +38,6 @@ export default {
 
 	methods  : {
 		createNewCharacter() {
-			console.log(this.character);
 			this.clearBorders();
 			if (
 				createNewCharacter(

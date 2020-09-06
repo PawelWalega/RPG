@@ -13,7 +13,7 @@ export const warrior = {
 			}
 		],
 		tier2 : [
-			{ name: 'WARRIOR Tier 2 Tal1', tooltip: 'Talent Tooltip' },
+			{ name: 'Preemptive position', tooltip: 'Makes Counter aviable' },
 			{
 				name    : 'Power Blow',
 				tooltip :
@@ -21,8 +21,11 @@ export const warrior = {
 			}
 		],
 		tier3 : [
-			{ name: 'WARRIOR Tier 3 Tal1', tooltip: 'Talent Tooltip' },
-			{ name: 'WARRIOR Tier 3 Tal2', tooltip: 'Talent Tooltip' }
+			{
+				name: 'Counter',
+				tooltip: 'Counter is only aviable after using Preemptive position'
+			},
+			{ name: 'Whirlwind', tooltip: "Name says it all... ^^'" }
 		]
 	}
 };

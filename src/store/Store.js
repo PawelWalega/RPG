@@ -10,8 +10,9 @@ const vuexLocal = new VuexPersistence({
 
 export const store = new Vuex.Store({
 	state     : {
-		page       : 'characters',
-		characters : []
+		page         : 'characters',
+		characters   : [],
+		selectedChar : ''
 	},
 	mutations : {
 		changeScreen(state, payload) {
@@ -23,6 +24,10 @@ export const store = new Vuex.Store({
 		},
 		deleteCharacter(state, payload) {
 			state.characters.splice(payload, 1);
+		},
+		toBattle(state, payload) {
+			state.selectedChar = payload;
+			store.commit('changeScreen', 'battle');
 		}
 	},
 	plugins   : [ vuexLocal.plugin ]

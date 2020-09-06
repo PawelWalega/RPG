@@ -93,7 +93,6 @@ export const createNewCharacter = function(
 		);
 		return false;
 	}
-	console.log(character);
 	const newCharacter = new Character(character);
 	store.commit('createNewCharacter', newCharacter);
 	return true;

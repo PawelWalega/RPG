@@ -62,6 +62,6 @@ export default {
   }
 }
 .main-menu {
-  min-height: 550px;
+  min-height: 700px;
 }
 </style>

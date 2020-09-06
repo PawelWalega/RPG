@@ -1,6 +1,6 @@
 <template>
   <div class="col-6 p-3">
-    <div class="row shadow-sm border border-secondary rounded">
+    <div class="row shadow-sm border border-secondary rounded single-character pt-2">
       <div class="col-4 text-center">{{ character.name }}</div>
       <div class="col-4 text-center">{{ character.race }}</div>
       <div class="col-4 text-center">{{ character.class }}</div>
@@ -44,62 +44,47 @@
           <div>{{ healthPoints | toInteger}}</div>
         </div>
       </div>
-      <div class="row px-4">
-        <div class="col-4"></div>
+      <div class="row px-4 talents">
+        <div class="col-4 my-3 p-1">
+          <div
+            class="border border-secondary rounded p-1 d-flex justify-content-center align-items-center"
+          >
+            <div
+              data-toggle="tooltip"
+              data-placement="bottom"
+              :title="tooltips.tier1"
+            >{{ character.talents.tier1 }}</div>
+          </div>
+        </div>
+        <div class="col-4 my-3 p-1">
+          <div
+            class="border border-secondary rounded p-1 d-flex justify-content-center align-items-center"
+          >
+            <div
+              data-toggle="tooltip"
+              data-placement="bottom"
+              :title="tooltips.tier2"
+            >{{ character.talents.tier2 }}</div>
+          </div>
+        </div>
+        <div class="col-4 my-3 p-1">
+          <div
+            class="border border-secondary rounded p-1 d-flex justify-content-center align-items-center"
+          >
+            <div
+              data-toggle="tooltip"
+              data-placement="bottom"
+              :title="tooltips.tier3"
+            >{{ character.talents.tier3 }}</div>
+          </div>
+        </div>
       </div>
-
-      <div class="btn" @click="deleteChar">Delete</div>
+      <div class="btn btn-outline-success w-25 mr-auto mb-2 ml-2" @click="toBattle">To Battle!</div>
+      <div class="btn btn-outline-danger w-25 ml-auto mb-2 mr-2" @click="deleteChar">Delete</div>
     </div>
   </div>
 </template>
-<script>
-import { store } from "../../../store/Store";
-import { calculators } from "../../../staticData/calculatorFunctions";
-export default {
-  props: ["character"],
-  created() {
-    console.log(this.character);
-  },
-  methods: {
-    deleteChar() {
-      store.commit("deleteCharacter", 0);
-    },
-  },
-  computed: {
-    attackOrMagicString() {
-      return this.magicPower < this.attackPower ? "Attack" : "Magic";
-    },
-    attackOrMagic() {
-      return this.magicPower < this.attackPower
-        ? this.attackPower
-        : this.magicPower;
-    },
-    dodgeChance() {
-      return calculators.calculateDodgeChance(
-        this.character.agi,
-        this.character.int
-      );
-    },
-    defenseRating() {
-      return calculators.calculateDefenseRating(
-        this.character.str,
-        this.character.armor
-      );
-    },
-    healthPoints() {
-      return calculators.calculateHealthPoints(
-        this.character.vit,
-        this.character.str
-      );
-    },
-    magicPower() {
-      return calculators.calculateMagicPower(this.character.int);
-    },
-    attackPower() {
-      return calculators.calculateAttackPower(this.mainStat);
-    },
-  },
-};
+<script src="./SingleCharacterScript">
 </script>
 <style scoped>
 .brackets {
@@ -109,5 +94,11 @@ export default {
 .brackets-parent {
   display: flex;
   align-items: center;
+}
+.single-character {
+  font-size: 90%;
+}
+.talents {
+  font-size: 80%;
 }
 </style>

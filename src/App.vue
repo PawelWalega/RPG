@@ -10,6 +10,7 @@
 </template>
 
 <script>
+// ADD TOOLTIPS WHEN CREATING CHARACTER
 import Menu from "./components/Menu.vue";
 import MainView from "./components/MainView.vue";
 

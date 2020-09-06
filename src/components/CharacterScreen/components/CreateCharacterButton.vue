@@ -1,6 +1,6 @@
 <template>
   <button
-    class="btn btn-outline-primary btn-sm position-absolute add-character"
+    class="btn btn-outline-primary btn-sm position-absolute add-character mb-2 mr-1"
     @click="newCharacterBtnClicked()"
   >New Character</button>
 </template>

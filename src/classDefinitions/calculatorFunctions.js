@@ -26,7 +26,7 @@ export class calculators {
 	static calculateAttackPower(mainStat, mods = null) {
 		if (mods) {
 			const sum = mods.reduce((acc, curr) => acc + curr);
-			return Number(((mainStat + sum) * 7.5).toFixed(2));
+			return Number(parseInt((mainStat + sum) * 7.5));
 		}
 		return Number((mainStat * 7.5).toFixed(2));
 	}
