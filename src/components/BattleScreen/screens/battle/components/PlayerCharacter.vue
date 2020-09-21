@@ -12,17 +12,22 @@
     </div>
     <div class="playerInfo"></div>
     <div class="d-flex flex-column">
-      <div class="progress">
+      <div
+        class="progress my-2"
+        :data-toggle="tooltip"
+        data-placement="bottom"
+        :title="charHP + '%'"
+      >
         <div
-          class="progress-bar bg-danger"
+          class="progress-bar bg-success"
           role="progressbar"
-          style="width: 25%"
+          style="width: 75%"
           aria-valuenow="25"
           aria-valuemin="0"
           aria-valuemax="100"
         ></div>
       </div>
-      <div class="progress">
+      <!-- <div class="progress">
         <div
           class="progress-bar bg-warning"
           role="progressbar"
@@ -50,13 +55,13 @@
           aria-valuenow="100"
           aria-valuemin="0"
           aria-valuemax="100"
-        ></div>
-      </div>
+      ></div>
+      </div>-->
     </div>
     <div class="d-flex justify-content-around mt-2">
-      <div class="btn btn-lg btn-secondary">Skill #1</div>
-      <div class="btn btn-lg btn-secondary">Skill #2</div>
-      <div class="btn btn-lg btn-secondary">Skill #3</div>
+      <div class="btn btn-lg btn-info" @click="skillUsed('Frost Bolt')">Frost Bolt</div>
+      <div class="btn btn-lg btn-info" @click="skillUsed('Blizzard')">Blizzard</div>
+      <div class="btn btn-lg btn-info" @click="skillUsed('Frost Armor')">Frost Armor</div>
     </div>
   </div>
 </template>
@@ -69,8 +74,23 @@ export default {
       battleChar: {},
     };
   },
+  computed: {
+    charHP() {
+      return 75;
+    },
+  },
+  methods: {
+    skillUsed(skillName) {
+      console.log(skillName);
+    },
+  },
   beforeMount() {
     this.battleChar = new BattleCharacter(this.character);
   },
 };
 </script>
+<style scoped>
+.progress {
+  height: 20px;
+}
+</style>

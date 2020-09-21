@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="container mt-5 px-4">
-      <div class="row gx-5">
+      <div class="row gx-5 min-h">
         <app-menu></app-menu>
         <main-view></main-view>
       </div>
@@ -40,6 +40,9 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+.min-h {
+  height: 650px;
 }
 .errorContainer {
   position: fixed;
