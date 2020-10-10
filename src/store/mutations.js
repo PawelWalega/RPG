@@ -16,6 +16,10 @@ export const mutations = {
     state.selectedChar = payload;
   },
   addBattleChar(state,payload){
-    Object.assign(state.battlingCharacters.player, payload)
+    if(payload.class === "Monster"){
+      Object.assign(state.battlingCharacters.monster, payload)
+    }else {
+      Object.assign(state.battlingCharacters.player, payload)
+    }
   }
 }

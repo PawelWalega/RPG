@@ -30,9 +30,7 @@ export class BattleCharacter {
 			character.agi,
 			character.int
 		)
-		console.log(this.class)
 		if(this.class !== "Monster"){
-
 			Object.assign(this.talents, character.talents);
 			const classDefinition =allClasses.find(el=> el.name===this.class).talents;
 			for(const tal in this.talents){
@@ -40,7 +38,7 @@ export class BattleCharacter {
 				this.talents[tal] =talent;
 			}
 		} else {
-			console.log("monster lol")
+			Object.assign(this.talents, character.talents);
 		}
 	}
 }

@@ -1,6 +1,10 @@
 <template>
   <div class="d-flex flex-column mt-5 gamelog">
-    <single-turn v-for="(round,idx) in gameLog.rounds" :key="idx" :round="round"></single-turn>
+    <single-turn
+      v-for="(round, idx) in gameLog.rounds"
+      :key="idx"
+      :round="round"
+    ></single-turn>
   </div>
 </template>
 <script>
@@ -13,7 +17,7 @@ export default {
   },
   data() {
     return {
-      text: 'text'
+      text: "text",
     };
   },
   computed: {
