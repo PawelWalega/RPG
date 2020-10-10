@@ -10,7 +10,7 @@
     <div class="d-flex flex-column">
       <div
         class="progress my-2"
-        :data-toggle="tooltip"
+        data-toggle="tooltip"
         data-placement="bottom"
         :title="charHP + '%'"
       >

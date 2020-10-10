@@ -11,9 +11,6 @@ import battleScreen from "./BattleScreen/BattleScreen.vue";
 import appRules from "./RulesScreen/Rules.vue";
 
 export default {
-  data() {
-    return {};
-  },
   computed: {
     page() {
       return this.$store.state.page;

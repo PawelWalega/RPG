@@ -12,7 +12,9 @@ export default {
     singleTurn: Turn,
   },
   data() {
-    return {};
+    return {
+      text: 'text'
+    };
   },
   computed: {
     ...mapState(["gameLog"]),
