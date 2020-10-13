@@ -13,6 +13,12 @@
     <div class="col-12 mt-3">
       <game-log></game-log>
     </div>
+    <div
+      class="btn btn-outline-danger w-25 ml-auto mb-2 mr-2"
+      @click="forfeit()"
+    >
+      Forfeit..
+    </div>
   </div>
 </template>
 <script src="./battleScript.js"></script>

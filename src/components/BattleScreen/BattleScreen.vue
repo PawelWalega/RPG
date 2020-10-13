@@ -1,5 +1,5 @@
 <template>
-  <battle v-if="selectedChar" :character="charToBattle"></battle>
+  <battle v-if="selectedChar" :character="selectedChar"></battle>
   <character-selection v-else></character-selection>
 </template>
 <script>
@@ -12,13 +12,7 @@ export default {
     characterSelection,
   },
   computed: {
-    ...mapState(["selectedChar", "characters"]),
-    charToBattle() {
-      const selectedChar = this.characters.find(
-        (char) => char.name === this.selectedChar
-      );
-      return selectedChar;
-    },
+    ...mapState(["selectedChar"]),
   },
 };
 </script>

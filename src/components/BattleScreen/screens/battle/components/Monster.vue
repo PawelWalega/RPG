@@ -43,9 +43,6 @@
 import { mapState } from "vuex";
 
 export default {
-  mounted() {
-    console.log(this.battlingCharacters.monster);
-  },
   computed: {
     healthPointsPercent() {
       return Math.floor(

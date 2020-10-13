@@ -29,13 +29,13 @@
       </div>
     </div>
     <div class="d-flex justify-content-around mt-2">
-      <div class="btn btn-lg btn-info" @click="skillUsed(skill1.name)">
+      <div class="btn btn-lg btn-info" @click="skillUsed(skill1)">
         {{ skill1.name }}
       </div>
-      <div class="btn btn-lg btn-info" @click="skillUsed(skill2.name)">
+      <div class="btn btn-lg btn-info" @click="skillUsed(skill2)">
         {{ skill2.name }}
       </div>
-      <div class="btn btn-lg btn-info" @click="skillUsed(skill3.name)">
+      <div class="btn btn-lg btn-info" @click="skillUsed(skill3)">
         {{ skill3.name }}
       </div>
     </div>
@@ -43,6 +43,7 @@
 </template>
 <script>
 import { mapState } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   computed: {
@@ -90,8 +91,9 @@ export default {
     },
   },
   methods: {
-    skillUsed(skillName) {
-      console.log(skillName);
+    ...mapActions(["playerAttack"]),
+    skillUsed(skill) {
+      this.playerAttack(skill);
     },
   },
 };

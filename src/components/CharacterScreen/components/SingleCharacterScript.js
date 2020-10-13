@@ -1,6 +1,7 @@
 import { store } from '../../../store/Store';
 import { calculators } from '../../../classDefinitions/calculatorFunctions';
 import { allClasses } from '@/staticData/allClasses';
+import { mapState } from 'vuex';
 
 export default {
 	props    : [ 'character' ],
@@ -14,6 +15,9 @@ export default {
 				tier3 : ''
 			}
 		};
+	},
+	mounted() {
+		console.log(this.selectedChar);
 	},
 	methods  : {
 		deleteChar() {
@@ -32,11 +36,12 @@ export default {
 			}
 		},
 		toBattle() {
-			store.commit('selectCharacter', this.character.name);
+			store.dispatch('selectCharacter', this.character.name);
 			store.commit('changeScreen', 'battle');
 		}
 	},
 	computed : {
+		...mapState([ 'selectedChar' ]),
 		mainStat() {
 			return this.character.str > this.character.agi
 				? this.character.str

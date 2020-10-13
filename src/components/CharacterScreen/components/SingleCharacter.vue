@@ -1,6 +1,8 @@
 <template>
   <div class="col-6 p-3">
-    <div class="row shadow-sm border border-secondary rounded single-character pt-2">
+    <div
+      class="row shadow-sm border border-secondary rounded single-character pt-2"
+    >
       <div class="col-4 text-center">{{ character.name }}</div>
       <div class="col-4 text-center">{{ character.race }}</div>
       <div class="col-4 text-center">{{ character.class }}</div>
@@ -27,21 +29,21 @@
         <div class="col-3 d-flex flex-column align-items-center">
           <div>Power:</div>
           <div class="brackets-parent">
-            {{ attackOrMagic | toSemiInteger}}
+            {{ attackOrMagic | toSemiInteger }}
             <span class="brackets">({{ attackOrMagicString }})</span>
           </div>
         </div>
         <div class="col-3 d-flex flex-column align-items-center">
           <div>Dodge:</div>
-          <div>{{ dodgeChance| toSemiInteger}}%</div>
+          <div>{{ dodgeChance | toSemiInteger }}%</div>
         </div>
         <div class="col-3 d-flex flex-column align-items-center">
           <div>Defense:</div>
-          <div>{{ defenseRating | toSemiInteger}}</div>
+          <div>{{ defenseRating | toSemiInteger }}</div>
         </div>
         <div class="col-3 d-flex flex-column align-items-center">
           <div>Health:</div>
-          <div>{{ healthPoints | toInteger}}</div>
+          <div>{{ healthPoints | toInteger }}</div>
         </div>
       </div>
       <div class="row px-4 talents">
@@ -53,7 +55,9 @@
               data-toggle="tooltip"
               data-placement="bottom"
               :title="tooltips.tier1"
-            >{{ character.talents.tier1 }}</div>
+            >
+              {{ character.talents.tier1 }}
+            </div>
           </div>
         </div>
         <div class="col-4 my-3 p-1">
@@ -64,7 +68,9 @@
               data-toggle="tooltip"
               data-placement="bottom"
               :title="tooltips.tier2"
-            >{{ character.talents.tier2 }}</div>
+            >
+              {{ character.talents.tier2 }}
+            </div>
           </div>
         </div>
         <div class="col-4 my-3 p-1">
@@ -75,12 +81,25 @@
               data-toggle="tooltip"
               data-placement="bottom"
               :title="tooltips.tier3"
-            >{{ character.talents.tier3 }}</div>
+            >
+              {{ character.talents.tier3 }}
+            </div>
           </div>
         </div>
       </div>
-      <div class="btn btn-outline-success w-25 mr-auto mb-2 ml-2" @click="toBattle">To Battle!</div>
-      <div class="btn btn-outline-danger w-25 ml-auto mb-2 mr-2" @click="deleteChar">Delete</div>
+      <button
+        class="btn btn-outline-success w-25 mr-auto mb-2 ml-2"
+        @click="toBattle"
+        :disabled="selectedChar !== null"
+      >
+        To Battle!
+      </button>
+      <div
+        class="btn btn-outline-danger w-25 ml-auto mb-2 mr-2"
+        @click="deleteChar"
+      >
+        Delete
+      </div>
     </div>
   </div>
 </template>

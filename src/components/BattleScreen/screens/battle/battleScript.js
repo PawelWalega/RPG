@@ -14,7 +14,15 @@ export default {
 		PlayerCharacter
 	},
 	methods     : {
-		...mapMutations([ 'addBattleChar' ])
+		...mapMutations([
+			'addBattleChar',
+			'setGameState',
+			'resetActiveCharacter'
+		]),
+		forfeit() {
+			this.setGameState(false);
+			this.resetActiveCharacter();
+		}
 	},
 	beforeMount() {
 		const battleChar = new BattleCharacter(this.character);

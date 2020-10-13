@@ -1,5 +1,7 @@
  <template>
-  <character-creation v-if="characters.length===0  || creatingNewCharacter"></character-creation>
+  <character-creation
+    v-if="characters.length === 0 || creatingNewCharacter"
+  ></character-creation>
   <characters-screen v-else :characters="characters"></characters-screen>
 </template>
 
@@ -7,6 +9,7 @@
 import charactersScreen from "./components/Characters.vue";
 import characterCreation from "./components/CharacterCreation.vue";
 import { EventBus } from "../../utils/EventBus";
+
 export default {
   data() {
     return {

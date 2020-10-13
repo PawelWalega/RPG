@@ -3,20 +3,25 @@
     <div
       class="border border-secondary rounded p-5 d-flex flex-column justify-content-center align-items-center"
     >
-      <div class="m-2">{{character.name}}</div>
-      <div class="m-2">{{character.race}}, {{character.class}}</div>
+      <div class="m-2">{{ character.name }}</div>
+      <div class="m-2">{{ character.race }}, {{ character.class }}</div>
 
-      <button class="btn btn-lg btn-outline-success" @click="selectCharacter(character.name)">select</button>
+      <button
+        class="btn btn-lg btn-outline-success"
+        @click="selectCharacter(character.name)"
+      >
+        select
+      </button>
     </div>
   </div>
 </template>
 <script>
-import { mapMutations } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   props: ["character"],
   methods: {
-    ...mapMutations(["selectCharacter"]),
+    ...mapActions(["selectCharacter"]),
   },
 };
 </script>

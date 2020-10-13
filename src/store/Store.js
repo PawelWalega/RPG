@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import VuexPersistence from 'vuex-persist';
 import { gameLog } from './temp';
 import { mutations } from './mutations';
+import { actions } from './actions';
 
 Vue.use(Vuex);
 
@@ -22,17 +23,18 @@ const vuexLocal = new VuexPersistence({
 // }
 
 export const store = new Vuex.Store({
+	mutations,
+	actions,
 	state     : {
 		gameLog,
-		battlingCharacters: {
-			player: {},
-			monster: {}
+		gameIsRunning      : false,
+		battlingCharacters : {
+			player  : {},
+			monster : {}
 		},
-		page         : 'characters',
-		characters   : [],
-		selectedChar : '',
-
+		page               : 'characters',
+		characters         : [],
+		selectedChar       : ''
 	},
-	mutations,
 	plugins   : [ vuexLocal.plugin ]
 });
