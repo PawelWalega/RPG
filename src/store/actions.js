@@ -1,18 +1,51 @@
-import { playOneRound } from '@/gameEngine/GameEngine';
+import { playOneRound, checkGameState } from '@/gameEngine/GameEngine';
+import { showWarning, displayEndGameMessage } from '@/utils/messeges';
 
 export const actions = {
-	playerAttack(store, skill) {
-		playOneRound(
-			skill,
-			store.state.battlingCharacters.player,
-			store.state.battlingCharacters.monster
-		);
+	playerAttack({ commit, state }, skill) {
+		let roundInfo = null;
+
+		try {
+			roundInfo = playOneRound(
+				skill,
+				state.battlingCharacters.player,
+				state.battlingCharacters.monster,
+				state.gameState
+			);
+		} catch (e) {
+			showWarning(e.message, document.getElementById('errorContainer'));
+		}
+
+		if (!roundInfo) {
+			return;
+		}
+
+		const {
+			playerAttackText,
+			monsterAttackText,
+			monsterDamageTakenInfo,
+			playerDamageTakenInfo
+		} = roundInfo;
+
+		commit('updateRoundInfo', { playerAttackText, monsterAttackText });
+		commit('updateCharactersHP', { playerDamageTakenInfo, monsterDamageTakenInfo });
+
+		const gameResult = checkGameState(state);
+		if (gameResult.gameIsRunning) {
+			return;
+		} else {
+			commit('setGameRunning', false);
+			commit('setRematchButtonVisibility', true);
+			displayEndGameMessage(gameResult.didPlayerWon);
+		}
 	},
 	selectCharacter({ commit, state }, payload) {
 		if (state.gameState.gameIsRunning) {
 			return;
 		}
-		commit('setGameState', true);
+		commit('setRematchButtonVisibility', false);
+		commit('setGameRunning', true);
+		commit('clearGameLog');
 		commit('setActiveCharacter', payload);
 	}
 };

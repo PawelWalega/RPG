@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import VuexPersistence from 'vuex-persist';
-import { gameLog } from './temp';
 import { mutations } from './mutations';
 import { actions } from './actions';
 
@@ -15,8 +14,15 @@ export const store = new Vuex.Store({
 	mutations,
 	actions,
 	state     : {
-		gameLog,
-		gameState          : { gameIsRunning: false },
+		gameLog            : { rounds: [] },
+		gameState          : {
+			gameIsRunning    : false,
+			skillsOnCooldown : {
+				player  : new Map(),
+				monster : new Map()
+			},
+			justFinished     : false
+		},
 		battlingCharacters : {
 			player  : {},
 			monster : {}

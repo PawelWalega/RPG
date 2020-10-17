@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-column mt-5 gamelog">
     <single-turn
-      v-for="(round, idx) in gameLog.rounds"
+      v-for="(round, idx) in gameLog"
       :key="idx"
       :round="round"
     ></single-turn>

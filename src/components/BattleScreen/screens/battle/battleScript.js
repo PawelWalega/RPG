@@ -1,9 +1,8 @@
 import GameLog from './components/GameLog.vue';
 import Monster from './components/Monster.vue';
 import PlayerCharacter from './components/PlayerCharacter.vue';
-// import { Calculator } from '@/gameEngine/utils/Calculator';
 import { BattleCharacter } from '@/classDefinitions/battlingCharacterSheet';
-import { mapMutations } from 'vuex';
+import { mapMutations, mapState, mapActions } from 'vuex';
 import { allMonsters } from '@/staticData/allMonsters.js';
 
 export default {
@@ -13,15 +12,18 @@ export default {
 		Monster,
 		PlayerCharacter
 	},
+	computed    : {
+		...mapState([ 'gameState' ])
+	},
 	methods     : {
-		...mapMutations([
-			'addBattleChar',
-			'setGameState',
-			'resetActiveCharacter'
-		]),
+		...mapMutations([ 'addBattleChar', 'setGameRunning', 'resetActiveCharacter' ]),
+		...mapActions([ 'selectCharacter' ]),
 		forfeit() {
-			this.setGameState(false);
+			this.setGameRunning(false);
 			this.resetActiveCharacter();
+		},
+		rematch() {
+			this.selectCharacter(this.character);
 		}
 	},
 	beforeMount() {

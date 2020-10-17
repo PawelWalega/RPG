@@ -3,6 +3,10 @@
     <characters-screen v-if="page === 'characters'"></characters-screen>
     <battle-screen v-if="page === 'battle'"></battle-screen>
     <app-rules v-if="page === 'rules'"></app-rules>
+    <div
+      id="errorContainer"
+      class="errorContainer errorAnimation displayNone"
+    ></div>
   </div>
 </template>
 <script >

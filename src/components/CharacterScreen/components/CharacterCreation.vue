@@ -6,7 +6,12 @@
         <!-- -------------------------- -->
         <div class="mb-3 col-4 d-flex flex-column align-items-center">
           <label class="form-label">Character name:</label>
-          <input type="text" :id="INPUTS.NAME" class="form-control" v-model="character.name" />
+          <input
+            type="text"
+            :id="INPUTS.NAME"
+            class="form-control"
+            v-model="character.name"
+          />
         </div>
 
         <div class="mb-3 col-4 d-flex flex-column align-items-center">
@@ -21,7 +26,9 @@
               v-for="(race, val) in allRaces"
               :key="val"
               :value="race.identifier"
-            >{{ race.name }}</option>
+            >
+              {{ race.name }}
+            </option>
           </select>
         </div>
 
@@ -37,7 +44,9 @@
               v-for="(charClass, idx) in allClasses"
               :key="idx"
               :value="charClass.name"
-            >{{ charClass.name }}</option>
+            >
+              {{ charClass.name }}
+            </option>
           </select>
         </div>
       </div>
@@ -50,15 +59,21 @@
             <option>Select a class first!</option>
           </select>
 
-          <select v-else class="form-select form-select-sm" @change="talentSelected($event)">
+          <select
+            v-else
+            class="form-select form-select-sm"
+            @change="talentSelected($event)"
+          >
             <option
-              v-for="(talent) in selectedClass.talents.tier1"
+              v-for="talent in selectedClass.talents.tier1"
               :key="talent.name"
               data-tier="tier1"
               data-toggle="tooltip"
               data-placement="bottom"
               :title="talent.tooltip"
-            >{{ talent.name }}</option>
+            >
+              {{ talent.name }}
+            </option>
           </select>
         </div>
 
@@ -68,15 +83,21 @@
             <option>Select a class first!</option>
           </select>
 
-          <select v-else class="form-select form-select-sm" @change="talentSelected($event)">
+          <select
+            v-else
+            class="form-select form-select-sm"
+            @change="talentSelected($event)"
+          >
             <option
-              v-for="(talent) in selectedClass.talents.tier2"
+              v-for="talent in selectedClass.talents.tier2"
               :key="talent.name"
               data-tier="tier2"
               data-toggle="tooltip"
               data-placement="bottom"
               :title="talent.tooltip"
-            >{{ talent.name }}</option>
+            >
+              {{ talent.name }}
+            </option>
           </select>
         </div>
 
@@ -86,15 +107,21 @@
             <option>Select a class first!</option>
           </select>
 
-          <select v-else class="form-select form-select-sm" @change="talentSelected($event)">
+          <select
+            v-else
+            class="form-select form-select-sm"
+            @change="talentSelected($event)"
+          >
             <option
-              v-for="(talent) in selectedClass.talents.tier3"
+              v-for="talent in selectedClass.talents.tier3"
               :key="talent.name"
               data-tier="tier3"
               data-toggle="tooltip"
               data-placement="bottom"
               :title="talent.tooltip"
-            >{{ talent.name }}</option>
+            >
+              {{ talent.name }}
+            </option>
           </select>
         </div>
       </div>
@@ -104,7 +131,9 @@
       <div class="row">
         <div class="col-12">
           <div class="row">
-            <div class="mt-3 col-3 d-flex flex-column align-items-center align-items-center">
+            <div
+              class="mt-3 col-3 d-flex flex-column align-items-center align-items-center"
+            >
               <div class="mx-auto">Strength:</div>
               <div class="d-flex align-items-center">
                 <button
@@ -112,18 +141,24 @@
                   data-stat="str"
                   data-action="add"
                   @click.prevent="attributesBtnClicked($event)"
-                >+</button>
+                >
+                  +
+                </button>
                 <span class="mx-2 attribute">{{ strength }}</span>
                 <button
                   class="btn btn-sm btn-outline-dark"
                   data-stat="str"
                   data-action="subtract"
                   @click.prevent="attributesBtnClicked($event)"
-                >-</button>
+                >
+                  -
+                </button>
               </div>
             </div>
 
-            <div class="mt-3 col-3 d-flex flex-column align-items-center align-items-center">
+            <div
+              class="mt-3 col-3 d-flex flex-column align-items-center align-items-center"
+            >
               <div class="mx-auto">Agility:</div>
               <div class="d-flex align-items-center">
                 <button
@@ -131,18 +166,24 @@
                   data-stat="agi"
                   data-action="add"
                   @click.prevent="attributesBtnClicked($event)"
-                >+</button>
+                >
+                  +
+                </button>
                 <span class="mx-2 attribute">{{ agility }}</span>
                 <button
                   class="btn btn-sm btn-outline-dark"
                   data-stat="agi"
                   data-action="subtract"
                   @click.prevent="attributesBtnClicked($event)"
-                >-</button>
+                >
+                  -
+                </button>
               </div>
             </div>
 
-            <div class="mt-3 col-3 d-flex flex-column align-items-center align-items-center">
+            <div
+              class="mt-3 col-3 d-flex flex-column align-items-center align-items-center"
+            >
               <div class="mx-auto">Inteligence:</div>
               <div class="d-flex align-items-center">
                 <button
@@ -150,18 +191,24 @@
                   data-stat="int"
                   data-action="add"
                   @click.prevent="attributesBtnClicked($event)"
-                >+</button>
+                >
+                  +
+                </button>
                 <span class="mx-2 attribute">{{ inteligence }}</span>
                 <button
                   class="btn btn-sm btn-outline-dark"
                   data-stat="int"
                   data-action="subtract"
                   @click.prevent="attributesBtnClicked($event)"
-                >-</button>
+                >
+                  -
+                </button>
               </div>
             </div>
 
-            <div class="mt-3 col-3 d-flex flex-column align-items-center align-items-center">
+            <div
+              class="mt-3 col-3 d-flex flex-column align-items-center align-items-center"
+            >
               <div class="mx-auto">Vitality:</div>
               <div class="d-flex align-items-center">
                 <button
@@ -169,14 +216,18 @@
                   data-stat="vit"
                   data-action="add"
                   @click.prevent="attributesBtnClicked($event)"
-                >+</button>
+                >
+                  +
+                </button>
                 <span class="mx-2 attribute">{{ vitality }}</span>
                 <button
                   class="btn btn-sm btn-outline-dark"
                   data-stat="vit"
                   data-action="subtract"
                   @click.prevent="attributesBtnClicked($event)"
-                >-</button>
+                >
+                  -
+                </button>
               </div>
             </div>
           </div>
@@ -189,7 +240,7 @@
           <div
             class="col-4 d-flex align-items-center justify-content-around"
             :id="INPUTS.POINTS_LEFT"
-            style="border: 1px solid transparent; border-radius: .25rem"
+            style="border: 1px solid transparent; border-radius: 0.25rem"
           >
             <div>Points left:</div>
             <div class="attribute">{{ pointsLeft }}</div>
@@ -220,7 +271,9 @@
               class="btn btn-outline-danger btn-lg ml-5 mt-3"
               @click.prevent="allCharactersScreen"
               :disabled="isButtonDisabled"
-            >Back</button>
+            >
+              Back
+            </button>
           </div>
           <div class="col-3 ml-auto mt-4">
             <button
@@ -228,8 +281,9 @@
               class="btn btn-outline-success btn-lg ml-5 mt-3"
               @click.prevent="createNewCharacter"
               :disabled="isButtonDisabled"
-            >Create Character</button>
-            <div id="errorContainer" class="errorContainer errorAnimation displayNone"></div>
+            >
+              Create Character
+            </button>
           </div>
         </div>
       </div>

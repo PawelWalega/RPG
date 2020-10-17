@@ -1,8 +1,8 @@
 import { Calculator } from '@/gameEngine/utils/Calculator';
 
-export const calculateOutputDMG = function({ baseDamage, modifier }, playerCharacter) {
+export const calculateOutputDMG = function({ baseDamage, modifier }, character) {
 	let damage = 0;
-	const playersModifierValue = playerCharacter[modifier.name];
+	const playersModifierValue = character[modifier.name];
 	damage += Calculator.generateMinMax(baseDamage.minDMG, baseDamage.maxDMG);
 	damage += playersModifierValue * modifier.value;
 
@@ -20,9 +20,15 @@ const calculateDamageTakenFromMagicSource = function(damage, { int, dodgeChance 
 	return finalDamageTaken;
 };
 
-const calculateDamageTakenFromPhysicalSource = function(damage, attackedCharacter) {
-	console.log(damage);
-	console.log(attackedCharacter);
+const calculateDamageTakenFromPhysicalSource = function(damage, { defenseRating, dodgeChance }) {
+	const finalDamageTaken = { damage: 0, condition: '' };
+	const roll = Calculator.rollD100();
+	if (dodgeChance >= roll) {
+		finalDamageTaken.condition = 'dodged';
+	} else {
+		finalDamageTaken.damage = Math.round(damage - defenseRating * 0.5);
+	}
+	return finalDamageTaken;
 };
 
 export const calculateCharacterDamageTaken = function(damage, sources, attackedCharacter) {

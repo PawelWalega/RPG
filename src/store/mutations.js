@@ -15,12 +15,30 @@ export const mutations = {
 		}
 	},
 	setActiveCharacter(state, payload) {
-		state.selectedChar = state.characters.find(
-			(char) => char.name === payload
-		);
+		state.selectedChar = state.characters.find((char) => char.name === payload);
 	},
-	setGameState(state, payload) {
+	setGameRunning(state, payload) {
 		state.gameState.gameIsRunning = payload;
+	},
+	clearGameLog(state) {
+		state.gameLog = [];
+	},
+	updateRoundInfo(state, payload) {
+		const { playerAttackText: player, monsterAttackText: monster } = payload;
+		state.gameLog.unshift({ player, monster });
+	},
+	updateCharactersHP(state, payload) {
+		state.battlingCharacters.player.hp -= payload.playerDamageTakenInfo.damage;
+		if (state.battlingCharacters.player.hp < 0) {
+			state.battlingCharacters.player.hp = 0;
+		}
+		state.battlingCharacters.monster.hp -= payload.monsterDamageTakenInfo.damage;
+		if (state.battlingCharacters.monster.hp < 0) {
+			state.battlingCharacters.monster.hp = 0;
+		}
+	},
+	setRematchButtonVisibility(state, payload) {
+		state.gameState.justFinished = payload;
 	},
 	resetActiveCharacter(state) {
 		state.selectedChar = null;

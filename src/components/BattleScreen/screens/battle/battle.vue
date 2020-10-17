@@ -10,15 +10,22 @@
       </div>
     </div>
 
-    <div class="col-12 mt-3">
+    <div class="col-12 mt-3 mb-2">
       <game-log></game-log>
     </div>
-    <div
+    <button
+      class="btn btn-outline-success w-25 mr-auto mb-2 ml-2"
+      v-show="gameState.justFinished"
+      @click="rematch()"
+    >
+      Rematch
+    </button>
+    <button
       class="btn btn-outline-danger w-25 ml-auto mb-2 mr-2"
       @click="forfeit()"
     >
       Forfeit..
-    </div>
+    </button>
   </div>
 </template>
 <script src="./battleScript.js"></script>
