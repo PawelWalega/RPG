@@ -9,9 +9,7 @@
         aria-valuemin="0"
         aria-valuemax="100"
       >
-        Player attack Orc with {{ round.player.attack}} for
-        {{round.player.damage}}
-        {{round.player.special}}.
+        {{ round.player }}
       </div>
     </div>
     <div class="progress log">
@@ -22,7 +20,9 @@
         aria-valuenow="50"
         aria-valuemin="0"
         aria-valuemax="100"
-      >Orc attacks Player with {{ round.monster.attack}} for {{round.monster.damage}}{{round.monster.special}}</div>
+      >
+        {{ round.monster }}
+      </div>
     </div>
   </div>
 </template>

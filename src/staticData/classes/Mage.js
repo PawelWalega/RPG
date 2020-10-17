@@ -3,14 +3,33 @@ export const mage = {
 	talents : {
 		tier1 : [
 			{
-				name    : 'Frost Bolt',
-				tooltip :
-					'Cast a bolt of frost at your oponent for a moderate damage'
+				name       : 'Frost Bolt',
+				tooltip    :
+					'Cast a bolt of frost at your oponent for a moderate damage',
+				baseDamage : {
+					minDMG : 8,
+					maxDMG : 14
+				},
+				cooldown   : null,
+				modifier   : {
+					name  : 'magicPower',
+					value : 0.05
+				},
+				sources    : [ 'Frost' ]
 			},
 			{
-				name    : 'Fire Bolt',
-				tooltip :
-					'Cast a bolt of fire at your oponent for a moderate damage'
+				name       : 'Fire Bolt',
+				tooltip    :
+					'Cast a bolt of fire at your oponent for a moderate damage',
+				baseDamage : {
+					minDMG : 6,
+					maxDMG : 10
+				},
+				modifier   : {
+					name  : 'magicPower',
+					value : 0.09
+				},
+				sources    : [ 'Fire' ]
 			}
 		],
 		tier2 : [

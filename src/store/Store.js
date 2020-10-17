@@ -11,23 +11,12 @@ const vuexLocal = new VuexPersistence({
 	storage : window.localStorage
 });
 
-// const initialState = function(){
-// return {
-// 	battlingCharacters.player: {},
-// 	gameLog: [],
-// 	page         : 'characters',
-// 	characters   : [],
-// 	selectedChar : '',
-
-// }
-// }
-
 export const store = new Vuex.Store({
 	mutations,
 	actions,
 	state     : {
 		gameLog,
-		gameIsRunning      : false,
+		gameState          : { gameIsRunning: false },
 		battlingCharacters : {
 			player  : {},
 			monster : {}

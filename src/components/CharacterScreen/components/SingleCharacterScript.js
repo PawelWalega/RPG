@@ -16,9 +16,6 @@ export default {
 			}
 		};
 	},
-	mounted() {
-		console.log(this.selectedChar);
-	},
 	methods  : {
 		deleteChar() {
 			store.commit('deleteCharacter', this.index);
@@ -81,6 +78,11 @@ export default {
 		},
 		attackPower() {
 			return calculators.calculateAttackPower(this.mainStat);
+		},
+		battleTip() {
+			return this.selectedChar
+				? 'There is a battle already in progress'
+				: `Battle with ${this.character.name}`;
 		}
 	},
 	created() {

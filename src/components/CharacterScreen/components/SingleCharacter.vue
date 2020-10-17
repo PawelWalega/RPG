@@ -87,13 +87,20 @@
           </div>
         </div>
       </div>
-      <button
-        class="btn btn-outline-success w-25 mr-auto mb-2 ml-2"
-        @click="toBattle"
-        :disabled="selectedChar !== null"
+      <div
+        data-toggle="tooltip"
+        data-placement="bottom"
+        :title="battleTip"
+        class="mr-auto mb-2 ml-2 w-25 d-inline"
       >
-        To Battle!
-      </button>
+        <button
+          class="btn btn-outline-success"
+          @click="toBattle"
+          :disabled="selectedChar !== null"
+        >
+          To Battle!
+        </button>
+      </div>
       <div
         class="btn btn-outline-danger w-25 ml-auto mb-2 mr-2"
         @click="deleteChar"

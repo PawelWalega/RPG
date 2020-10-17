@@ -9,7 +9,7 @@ export const actions = {
 		);
 	},
 	selectCharacter({ commit, state }, payload) {
-		if (state.gameIsRunning) {
+		if (state.gameState.gameIsRunning) {
 			return;
 		}
 		commit('setGameState', true);

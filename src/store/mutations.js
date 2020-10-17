@@ -10,7 +10,7 @@ export const mutations = {
 		state.characters.splice(payload, 1);
 	},
 	clearSelected(state) {
-		if (!state.gameIsRunning) {
+		if (!state.gameState.gameIsRunning) {
 			state.selectedChar = '';
 		}
 	},
@@ -20,7 +20,7 @@ export const mutations = {
 		);
 	},
 	setGameState(state, payload) {
-		state.gameIsRunning = payload;
+		state.gameState.gameIsRunning = payload;
 	},
 	resetActiveCharacter(state) {
 		state.selectedChar = null;
