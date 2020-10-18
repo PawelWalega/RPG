@@ -8,7 +8,7 @@
 
       <button
         class="btn btn-lg btn-outline-success"
-        @click="selectCharacter(character.name)"
+        @click="selectCharacter(character)"
       >
         select
       </button>

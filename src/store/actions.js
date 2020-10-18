@@ -40,12 +40,14 @@ export const actions = {
 		}
 	},
 	selectCharacter({ commit, state }, payload) {
+		commit('setGameRunning', false);
 		if (state.gameState.gameIsRunning) {
 			return;
 		}
 		commit('setRematchButtonVisibility', false);
-		commit('setGameRunning', true);
 		commit('clearGameLog');
-		commit('setActiveCharacter', payload);
+		commit('setGameRunning', true);
+		console.log(payload);
+		commit('setActiveCharacter', payload.name);
 	}
 };

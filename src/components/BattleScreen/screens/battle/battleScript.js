@@ -12,6 +12,11 @@ export default {
 		Monster,
 		PlayerCharacter
 	},
+	data() {
+		return {
+			monster : null
+		};
+	},
 	computed    : {
 		...mapState([ 'gameState' ])
 	},
@@ -23,14 +28,19 @@ export default {
 			this.resetActiveCharacter();
 		},
 		rematch() {
+			this.setGameRunning(false);
+			this.setBattlingCharacters(this.character, this.monster);
 			this.selectCharacter(this.character);
+		},
+		setBattlingCharacters(character, monster) {
+			const player = new BattleCharacter(character);
+			const enemy = new BattleCharacter(monster);
+			this.addBattleChar(player);
+			this.addBattleChar(enemy);
 		}
 	},
 	beforeMount() {
-		const battleChar = new BattleCharacter(this.character);
-		const orc = allMonsters[0];
-		const monster = new BattleCharacter(orc);
-		this.addBattleChar(battleChar);
-		this.addBattleChar(monster);
+		this.monster = allMonsters[0];
+		this.setBattlingCharacters(this.character, this.monster);
 	}
 };
