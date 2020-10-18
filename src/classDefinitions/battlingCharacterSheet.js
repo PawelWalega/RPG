@@ -11,6 +11,7 @@ export class BattleCharacter {
 		this.int = character.int;
 		this.str = character.str;
 		this.talents = {};
+		this.critChance = character.critChance;
 		this.hp = Math.round(calculators.calculateHealthPoints(character.vit, character.str));
 		this.maxHP = this.hp;
 		this.defenseRating = calculators.calculateDefenseRating(character.str, character.armor);

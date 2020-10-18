@@ -1,54 +1,43 @@
-// import * as PlayerFunctions from '@/gameEngine/playerMethods';
 import {
-	calculateAttackText,
-	calculateOutputDMG,
-	calculateCharacterDamageTaken
+	attackCharacter,
+	roundCleanUp,
+	setCooldown,
+	gameConditionsCheck
 } from '@/gameEngine/generalGameFunctions';
 
 export const playOneRound = function(skill, playerCharacter, monster, gameState) {
 	// Checks telling if the skill is usable and returning appropriate message
-	if (gameState.skillsOnCooldown.player.has(skill.name)) {
-		throw new Error(`${skill.name} is still on cooldown.`);
-	}
-	if (!gameState.gameIsRunning) {
-		throw new Error(
-			`Game is over. Click new battle to try your chances again with ${playerCharacter.name} or go to character panel to pick another one`
-		);
+	try {
+		gameConditionsCheck(skill, gameState, playerCharacter);
+	} catch (e) {
+		throw new Error(e);
 	}
 	// **** PLAYER DAMAGE AND ROUND INFO ****
-	const playerDamage = calculateOutputDMG(skill, playerCharacter);
-
-	const monsterDamageTakenInfo = calculateCharacterDamageTaken(
-		playerDamage,
-		skill.sources,
-		monster
-	);
-	const playerAttackText = calculateAttackText(
-		monsterDamageTakenInfo,
-		monster.name,
-		skill,
-		playerCharacter.name
-	);
+	const {
+		defendingCharacterDamageTakenInfo : monsterDamageTakenInfo,
+		attackText                        : playerAttackText
+	} = attackCharacter(playerCharacter, skill, monster);
+	setCooldown(skill, gameState, 'player');
 
 	// **** MONSTER DAMAGE AND ROUND INFO ****
 	const isTier2MonsterSkillOnCD = gameState.skillsOnCooldown.monster.has(
 		monster.talents.tier2.name
 	);
 	const monsterSkillUsed = isTier2MonsterSkillOnCD ? monster.talents.tier2 : monster.talents.tier1;
-	const monsterDamage = calculateOutputDMG(monsterSkillUsed, monster);
-	const playerDamageTakenInfo = calculateCharacterDamageTaken(
-		monsterDamage,
-		monsterSkillUsed.sources,
-		playerCharacter
-	);
-	const monsterAttackText = calculateAttackText(
-		playerDamageTakenInfo,
-		playerCharacter.name,
-		monsterSkillUsed,
-		monster.name
+	const {
+		defendingCharacterDamageTakenInfo : playerDamageTakenInfo,
+		attackText                        : monsterAttackText
+	} = attackCharacter(monster, monsterSkillUsed, playerCharacter);
+	setCooldown(monsterSkillUsed, gameState, 'monster');
+
+	// ****** ROUND CLEANUP ******
+	// Lower cooldowns and effects timers and removed finished ones
+	roundCleanUp(
+		gameState.skillsOnCooldown.player,
+		gameState.skillsOnCooldown.monster,
+		gameState.specialEffects
 	);
 
-	// make changes to game state - buffs debufs (FUTURE FEATURE)
 	return { monsterDamageTakenInfo, playerAttackText, playerDamageTakenInfo, monsterAttackText };
 };
 

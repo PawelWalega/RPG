@@ -18,9 +18,9 @@ export class calculators {
 	static calculateHealthPoints(vit, str, mods = null) {
 		if (mods) {
 			const sum = mods.reduce((acc, curr) => acc + curr);
-			return Number(((vit * 1.5 + str * 0.25 + sum) * 1).toFixed(2));
+			return Number(((vit * 1.5 + str * 0.25 + sum) * 10).toFixed(2));
 		}
-		return Number(((vit * 1.5 + str * 0.25) * 1).toFixed(2));
+		return Number(((vit * 1.5 + str * 0.25) * 10).toFixed(2));
 	}
 
 	static calculateAttackPower(mainStat, mods = null) {

@@ -1,13 +1,14 @@
 export const orc = {
-	agi     : 8,
-	str     : 17,
-	vit     : 16,
-	int     : 5,
-	name    : 'Orc Warrior',
-	class   : 'Monster',
-	race    : 'Orc',
-	armor   : 15,
-	talents : {
+	agi        : 8,
+	str        : 17,
+	vit        : 16,
+	int        : 5,
+	name       : 'Orc Warrior',
+	class      : 'Monster',
+	race       : 'Orc',
+	critChance : 5,
+	armor      : 15,
+	talents    : {
 		tier1 : {
 			name       : 'Axe Strike',
 			baseDamage : {

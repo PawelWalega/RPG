@@ -10,19 +10,24 @@ const vuexLocal = new VuexPersistence({
 	storage : window.localStorage
 });
 
+export const initGameState = function() {
+	return {
+		gameIsRunning    : false,
+		skillsOnCooldown : {
+			player  : new Map(),
+			monster : new Map()
+		},
+		justFinished     : false,
+		specialEffects   : new Map()
+	};
+};
+const gameState = initGameState();
 export const store = new Vuex.Store({
 	mutations,
 	actions,
 	state     : {
 		gameLog            : { rounds: [] },
-		gameState          : {
-			gameIsRunning    : false,
-			skillsOnCooldown : {
-				player  : new Map(),
-				monster : new Map()
-			},
-			justFinished     : false
-		},
+		gameState,
 		battlingCharacters : {
 			player  : {},
 			monster : {}

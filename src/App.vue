@@ -48,8 +48,8 @@ body {
   position: fixed;
   padding: 4rem 8rem;
   transform: translate(-50%, -50%);
-  top: 10%;
-  left: 50%;
+  top: 40%;
+  left: 60%;
   text-align: center;
   border: 2px solid red;
   background-color: white;

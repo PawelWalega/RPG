@@ -13,7 +13,7 @@ export const actions = {
 				state.gameState
 			);
 		} catch (e) {
-			showWarning(e.message, document.getElementById('errorContainer'));
+			showWarning(e.message, document.getElementById('errorContainer'), 10000);
 		}
 
 		if (!roundInfo) {
@@ -39,15 +39,17 @@ export const actions = {
 			displayEndGameMessage(gameResult.didPlayerWon);
 		}
 	},
-	selectCharacter({ commit, state }, payload) {
-		commit('setGameRunning', false);
+	selectCharacter({ commit, state, dispatch }, payload) {
 		if (state.gameState.gameIsRunning) {
 			return;
 		}
-		commit('setRematchButtonVisibility', false);
-		commit('clearGameLog');
+		dispatch('resetGameState');
 		commit('setGameRunning', true);
-		console.log(payload);
 		commit('setActiveCharacter', payload.name);
+	},
+	resetGameState({ commit }) {
+		commit('clearGameLog');
+		commit('setRematchButtonVisibility', false);
+		commit('resetGameState');
 	}
 };

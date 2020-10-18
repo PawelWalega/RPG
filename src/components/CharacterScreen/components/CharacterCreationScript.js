@@ -21,6 +21,7 @@ export default {
 				race            : '',
 				armor           : 10,
 				hp              : 10,
+				critChance      : 5,
 				selectedTalents : { tier1: '', tier2: '', tier3: '' }
 			},
 			raceModifiers        : {
@@ -67,9 +68,7 @@ export default {
 				this.selectedClass = null;
 			} else {
 				this.character.class = event.target.value;
-				this.selectedClass = this.allClasses.filter(
-					(c) => c.name === this.character.class
-				)[0];
+				this.selectedClass = this.allClasses.filter((c) => c.name === this.character.class)[0];
 				const talents = this.selectedClass.talents;
 				for (const tal in talents) {
 					this.character.selectedTalents[tal] = talents[tal][0]['name'];
@@ -101,9 +100,7 @@ export default {
 					5 + this.raceModifiers[event.target.dataset.stat]
 				) {
 					alert(
-						`You can't lower this stat below ${this.character[
-							event.target.dataset.stat
-						]}!`
+						`You can't lower this stat below ${this.character[event.target.dataset.stat]}!`
 					);
 					return;
 				} else {
@@ -159,28 +156,17 @@ export default {
 			return this.selectedClass ? true : false;
 		},
 		mainStat() {
-			return this.character.str >= this.character.agi
-				? this.character.str
-				: this.character.agi;
+			return this.character.str >= this.character.agi ? this.character.str : this.character.agi;
 		},
 		// Stats:
 		dodgeChance() {
-			return calculators.calculateDodgeChance(
-				this.character.agi,
-				this.character.int
-			);
+			return calculators.calculateDodgeChance(this.character.agi, this.character.int);
 		},
 		defenseRating() {
-			return calculators.calculateDefenseRating(
-				this.character.str,
-				this.character.armor
-			);
+			return calculators.calculateDefenseRating(this.character.str, this.character.armor);
 		},
 		healthPoints() {
-			return calculators.calculateHealthPoints(
-				this.character.vit,
-				this.character.str
-			);
+			return calculators.calculateHealthPoints(this.character.vit, this.character.str);
 		},
 		magicPower() {
 			return calculators.calculateMagicPower(this.character.int);

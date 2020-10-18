@@ -1,3 +1,5 @@
+import { initGameState } from '@/store/Store';
+
 export const mutations = {
 	changeScreen(state, payload) {
 		state.page = payload;
@@ -49,5 +51,8 @@ export const mutations = {
 		} else {
 			Object.assign(state.battlingCharacters.player, payload);
 		}
+	},
+	resetGameState(state) {
+		state.gameState = initGameState();
 	}
 };
