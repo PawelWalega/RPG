@@ -59,7 +59,7 @@ const calculateAttackText = function(
 		if (extraEffect) {
 			return `${playerCharacterName} attacks ${monsterName} with ${name} and deals ${damage} ${extraEffect}`;
 		} else {
-			return `${playerCharacterName} attacks ${monsterName} with ${name} and deals ${damage}`;
+			return `${playerCharacterName} attacks ${monsterName} with ${name} and deals ${damage} damage`;
 		}
 	} else {
 		return `${playerCharacterName} attacks ${monsterName} with ${name} but it was ${condition}`;

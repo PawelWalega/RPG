@@ -96,7 +96,7 @@
         <button
           class="btn btn-outline-success"
           @click="toBattle"
-          :disabled="selectedChar !== null"
+          :disabled="selectedChar !== ''"
         >
           To Battle!
         </button>

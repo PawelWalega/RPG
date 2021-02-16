@@ -41,6 +41,7 @@
 </template>
 <script>
 import { mapState } from "vuex";
+import { extractDamageFromLog } from "../../../../../utils/commonFunctions";
 
 export default {
   computed: {
@@ -51,7 +52,7 @@ export default {
           100
       );
     },
-    ...mapState(["battlingCharacters"]),
+    ...mapState(["battlingCharacters", "gameLog", "gameState"]),
     progressBarStyle() {
       let style = null;
       let percent = this.healthPointsPercent;
@@ -76,6 +77,18 @@ export default {
             type: "Physical",
           }
         : { power: this.battlingCharacters.monster.magicPower, type: "Magic" };
+    },
+  },
+  beforeMount() {
+    if (this.gameState.gameIsRunning) this.adjustHealthBar();
+  },
+  methods: {
+    adjustHealthBar() {
+      const dmgTaken = this.gameLog.reduce(
+        (acc, log) => extractDamageFromLog(log.player) + acc,
+        0
+      );
+      this.battlingCharacters.monster.hp -= dmgTaken;
     },
   },
 };

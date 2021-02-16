@@ -4,3 +4,13 @@ export function deepFreeze(obj) {
 		return Object.freeze(obj);
 	}
 }
+
+export function extractDamageFromLog(log) {
+	const logg = log
+		.split(' ')
+		.filter((el) => {
+			return !isNaN(+el);
+		})
+		.map((el) => +el);
+	return logg[0];
+}

@@ -44,10 +44,11 @@
 <script>
 import { mapState } from "vuex";
 import { mapActions } from "vuex";
+import { extractDamageFromLog } from "../../../../../utils/commonFunctions";
 
 export default {
   computed: {
-    ...mapState(["battlingCharacters"]),
+    ...mapState(["battlingCharacters", "gameLog", "gameState"]),
     healthPointsPercent() {
       return Math.floor(
         (this.battlingCharacters.player.hp /
@@ -90,10 +91,20 @@ export default {
       return style;
     },
   },
+  beforeMount() {
+    if (this.gameState.gameIsRunning) this.adjustHealthBar();
+  },
   methods: {
     ...mapActions(["playerAttack"]),
     skillUsed(skill) {
       this.playerAttack(skill);
+    },
+    adjustHealthBar() {
+      const dmgTaken = this.gameLog.reduce(
+        (acc, log) => extractDamageFromLog(log.monster) + acc,
+        0
+      );
+      this.battlingCharacters.player.hp -= dmgTaken;
     },
   },
 };

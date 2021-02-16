@@ -29,8 +29,8 @@ export const store = new Vuex.Store({
 		gameLog            : { rounds: [] },
 		gameState,
 		battlingCharacters : {
-			player  : {},
-			monster : {}
+			player  : null,
+			monster : null
 		},
 		page               : 'characters',
 		characters         : [],

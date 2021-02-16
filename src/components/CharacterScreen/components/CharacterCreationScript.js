@@ -183,15 +183,12 @@ export default {
 
 	watch    : {
 		selectedRace(value) {
-			console.log(value);
-			console.log(this.allRaces);
 			const race = this.allRaces[value];
 			if (race) {
 				for (let mod in this.raceModifiers) {
 					this.character[mod] -= this.raceModifiers[mod];
 				}
 				const newModifiers = race.modifiers;
-				console.log(newModifiers);
 				for (let mod in newModifiers) {
 					this.character[mod] += newModifiers[mod];
 					this.raceModifiers[mod] = newModifiers[mod];

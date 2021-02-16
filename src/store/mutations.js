@@ -54,5 +54,11 @@ export const mutations = {
 	},
 	resetGameState(state) {
 		state.gameState = initGameState();
+	},
+	resetBattlingChars(state) {
+		state.battlingCharacters = {
+			player  : null,
+			monster : null
+		};
 	}
 };
