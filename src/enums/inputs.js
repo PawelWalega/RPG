@@ -1,7 +1,9 @@
-export const INPUTS = {
+import { deepFreeze } from '../utils/commonFunctions';
+
+const INPUTS = deepFreeze({
 	NAME        : 'nameField',
 	POINTS_LEFT : 'pointsField',
 	RACE        : 'raceField',
 	CLASS       : 'classField'
-};
-Object.freeze(INPUTS);
+});
+export { INPUTS };

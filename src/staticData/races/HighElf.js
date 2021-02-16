@@ -1,6 +1,8 @@
+import { RACES } from '../../enums/races';
+
 export const highElf = {
 	name            : 'High Elf',
-	identifier      : 'highElf',
+	identifier      : RACES.HIGH_ELF,
 	modifiers       : { int: 4, vit: 0, str: 0, agi: 0 },
 	about           : 'Very inteligent and reserved race',
 	racialAbilities : [

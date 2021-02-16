@@ -1,4 +1,6 @@
-export const ERRORS = {
+import { deepFreeze } from '../utils/commonFunctions';
+
+const ERRORS = deepFreeze({
 	CHARACTER_CREATION : {
 		NAME       : {
 			MINIMUM_CHARACTERS  : 'Name has to have minimum of 2 characters.',
@@ -20,5 +22,5 @@ export const ERRORS = {
 				'You already have 4 characters! Please delete one before creating a new one.'
 		}
 	}
-};
-Object.freeze(ERRORS);
+});
+export { ERRORS };

@@ -21,7 +21,7 @@
             :id="INPUTS.RACE"
             @change="raceSelected($event)"
           >
-            <option>Select a race:</option>
+            <option>{{ DOM.SELECT_RACE }}</option>
             <option
               v-for="(race, val) in allRaces"
               :key="val"

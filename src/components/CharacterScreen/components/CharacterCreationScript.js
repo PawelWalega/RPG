@@ -4,11 +4,14 @@ import { calculators } from '../../../classDefinitions/calculatorFunctions';
 import { createNewCharacter } from '../../../functionDefinitions/CharacterCreationFunction';
 import { INPUTS } from '../../../enums/inputs';
 import { EventBus } from '../../../utils/EventBus';
+import { RACES } from '../../../enums/races';
+import { DOM } from '../../../enums/DOM';
 
 export default {
 	data() {
 		return {
 			INPUTS,
+			DOM,
 			allRaces,
 			allClasses,
 			character            : {
@@ -111,23 +114,25 @@ export default {
 		},
 
 		raceSelected(event) {
-			let race = event.target.value.toLowerCase();
-			if (race !== 'human') {
+			let race = event.target.value;
+			if (race === RACES.HUMAN) {
+				if (this.pointsLeftModified) {
+					this.pointsLeft -= 4;
+					this.pointsLeftModified = false;
+				} else {
+					this.pointsLeft += 4;
+					this.pointsLeftModified = true;
+				}
+			} else {
 				if (this.pointsLeftModified) {
 					this.pointsLeft -= 4;
 					this.pointsLeftModified = false;
 				}
-			} else {
-				if (!this.pointsLeftModified) {
-					this.pointsLeftModified = true;
-					this.pointsLeft += 4;
-				}
 			}
-			if (race === 'select a race:') {
-				race = '';
-			}
+			if (race === DOM.SELECT_RACE) race = '';
 			this.character.race = race;
 		},
+
 		allCharactersScreen() {
 			EventBus.$emit('back-button-clicked');
 		}
@@ -178,12 +183,15 @@ export default {
 
 	watch    : {
 		selectedRace(value) {
+			console.log(value);
+			console.log(this.allRaces);
 			const race = this.allRaces[value];
 			if (race) {
 				for (let mod in this.raceModifiers) {
 					this.character[mod] -= this.raceModifiers[mod];
 				}
 				const newModifiers = race.modifiers;
+				console.log(newModifiers);
 				for (let mod in newModifiers) {
 					this.character[mod] += newModifiers[mod];
 					this.raceModifiers[mod] = newModifiers[mod];
