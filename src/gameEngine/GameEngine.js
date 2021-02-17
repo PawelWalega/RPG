@@ -23,12 +23,15 @@ export const playOneRound = function(skill, playerCharacter, monster, gameState)
 	const isTier2MonsterSkillOnCD = gameState.skillsOnCooldown.monster.has(
 		monster.talents.tier2.name
 	);
-	const monsterSkillUsed = isTier2MonsterSkillOnCD ? monster.talents.tier2 : monster.talents.tier1;
+
+	const monsterSkillUsed = isTier2MonsterSkillOnCD ? monster.talents.tier1 : monster.talents.tier2;
 	const {
 		defendingCharacterDamageTakenInfo : playerDamageTakenInfo,
 		attackText                        : monsterAttackText
 	} = attackCharacter(monster, monsterSkillUsed, playerCharacter);
 	setCooldown(monsterSkillUsed, gameState, 'monster');
+
+	// ****** Trigger EoR effects ******
 
 	// ****** ROUND CLEANUP ******
 	// Lower cooldowns and effects timers and removed finished ones

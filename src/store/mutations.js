@@ -43,7 +43,7 @@ export const mutations = {
 		state.gameState.justFinished = payload;
 	},
 	resetActiveCharacter(state) {
-		state.selectedChar = null;
+		state.selectedChar = '';
 	},
 	addBattleChar(state, payload) {
 		if (payload.class === 'Monster') {
