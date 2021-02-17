@@ -1,4 +1,4 @@
-# rpg
+# RPG - a Vue game created to practice all things Vue and JS related. Vue components, props, events, methods, computed, Vuex, folder structure. JS: classes, functions, enums, Map and other data structures. My design. It is a huge project and not finished yet. I had fun designing, instaling and building it but this should be refactored and probably writen in TS. Maybe one day. For now, feel free to explore it on your own.
 
 ## Project setup
 ```
