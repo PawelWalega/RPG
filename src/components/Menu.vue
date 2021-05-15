@@ -5,7 +5,7 @@
     >
       <div
         class="border border-dark py-4 justify-content-center align-items-center d-flex flex-column rounded shadow-sm hover-link"
-        @click="changeScreen( 'characters' )"
+        @click="changeScreen('characters')"
       >
         <img :src="icons.knightIcon" class="icon mx-5" />
       </div>
@@ -17,12 +17,13 @@
       </div>
       <div
         class="border border-dark py-4 justify-content-center align-items-center d-flex flex-column rounded shadow-sm hover-link"
-        @click="changeScreen( 'rules' )"
+        @click="changeScreen('rules')"
       >
         <img :src="icons.bookIcon" class="icon mx-5" />
       </div>
       <div
         class="border border-dark py-4 justify-content-center align-items-center d-flex flex-column rounded shadow-sm hover-link"
+        @click="logout"
       >
         <img :src="icons.doorIcon" class="icon mx-5" />
       </div>
@@ -49,6 +50,9 @@ export default {
     battleScreen() {
       store.commit("clearSelected");
       this.changeScreen("battle");
+    },
+    logout() {
+      alert("Logging you out..");
     },
   },
 };

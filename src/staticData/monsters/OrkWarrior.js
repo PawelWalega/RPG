@@ -1,7 +1,7 @@
 export const orc = {
 	agi        : 8,
 	str        : 17,
-	vit        : 16,
+	vit        : 14,
 	int        : 5,
 	name       : 'Orc Warrior',
 	class      : 'Monster',
@@ -12,8 +12,8 @@ export const orc = {
 		tier1 : {
 			name       : 'Axe Strike',
 			baseDamage : {
-				minDMG : 6,
-				maxDMG : 17
+				minDMG : 3,
+				maxDMG : 8
 			},
 			sources    : [ 'Physical' ],
 			modifier   : {
@@ -25,8 +25,8 @@ export const orc = {
 		tier2 : {
 			name       : 'Power Blow',
 			baseDamage : {
-				minDMG : 13,
-				maxDMG : 21
+				minDMG : 6,
+				maxDMG : 11
 			},
 			modifier   : {
 				name  : 'attackPower',

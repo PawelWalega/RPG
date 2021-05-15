@@ -6,8 +6,8 @@ export const mage = {
 				name          : 'Frost Bolt',
 				tooltip       : 'Cast a bolt of frost at your oponent for a moderate damage',
 				baseDamage    : {
-					minDMG : 8,
-					maxDMG : 14
+					minDMG : 5,
+					maxDMG : 8
 				},
 				cooldown      : 0,
 				modifier      : {
@@ -22,8 +22,8 @@ export const mage = {
 				name          : 'Fire Bolt',
 				tooltip       : 'Cast a bolt of fire at your oponent for a moderate damage',
 				baseDamage    : {
-					minDMG : 7,
-					maxDMG : 17
+					minDMG : 4,
+					maxDMG : 9
 				},
 				modifier      : {
 					name  : 'magicPower',
@@ -36,52 +36,62 @@ export const mage = {
 		],
 		tier2 : [
 			{
-				name          : 'Blizzard',
-				tooltip       :
-					'Deals small damage periodically and increases chance to critically hit with frost spells for 5 rounds',
-				baseDamage    : {
-					minDMG : 4,
-					maxDMG : 6
+				name       : 'Blizzard',
+				tooltip    : 'Deals big chunk of frost damage',
+				baseDamage : {
+					minDMG : 7,
+					maxDMG : 10
 				},
-				cooldown      : 5,
-				modifier      : {
+				cooldown   : 3,
+				modifier   : {
 					name  : 'magicPower',
-					value : 0.04
+					value : 0.1
 				},
-				sources       : [ 'Frost' ],
-				role          : 'special',
-				specialEffect : function() {}
+				sources    : [ 'Frost' ]
 			},
 			{
-				name          : 'Fireball',
-				tooltip       : 'Deals big chunk of fire damage',
-				baseDamage    : {
-					minDMG : 9,
-					maxDMG : 17
+				name       : 'Fireball',
+				tooltip    : 'Deals big chunk of fire damage',
+				baseDamage : {
+					minDMG : 7,
+					maxDMG : 13
 				},
-				modifier      : {
+				modifier   : {
 					name  : 'magicPower',
 					value : 0.15
 				},
-				cooldown      : 3,
-				sources       : [ 'Fire' ],
-				role          : 'normal',
-				specialEffect : null
+				cooldown   : 3,
+				sources    : [ 'Fire' ]
 			}
 		],
 		tier3 : [
 			{
-				name     : 'Frost Armor',
-				tooltip  : 'Reduces all damage taken by 15% for 3 rounds',
-				role     : 'special',
-				cooldown : 3
+				name       : 'Comet',
+				tooltip    : 'Big frost damage but on 6 rounds cooldown',
+				cooldown   : 6,
+				baseDamage : {
+					minDMG : 18,
+					maxDMG : 24
+				},
+				modifier   : {
+					name  : 'magicPower',
+					value : 0.1
+				},
+				sources    : [ 'Frost' ]
 			},
 			{
-				name     : 'Fire wall',
-				tooltip  :
-					'Increases a chance opponent will miss you by 5% and deals small fire damage to him for 4 rounds',
-				role     : 'special',
-				cooldown : 3
+				name       : 'Meteor',
+				tooltip    : 'Huge fire damage but on 8 rounds cooldown',
+				baseDamage : {
+					minDMG : 17,
+					maxDMG : 28
+				},
+				modifier   : {
+					name  : 'magicPower',
+					value : 0.15
+				},
+				cooldown   : 8,
+				sources    : [ 'Fire' ]
 			}
 		]
 	}
